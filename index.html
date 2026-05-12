@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANGel — Liukocyte BioSciences</title>
+  <meta name="description" content="ANGel is an immune-activating bioactive hydrogel that accelerates wound healing by promoting rapid blood vessel regrowth. Immune Innovation for Active Healing." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ VASCULAR BACKGROUND (fixed, behind everything) ============ -->
+  <div class="vascular-bg" aria-hidden="true">
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bgGlow" cx="50%" cy="0%" r="80%">
+          <stop offset="0%" stop-color="#3FA3D1" stop-opacity="0.18"/>
+          <stop offset="60%" stop-color="#3FA3D1" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#bgGlow)"/>
+      <g stroke="#3FA3D1" stroke-width="1.2" fill="none" opacity="0.35">
+        <path d="M-50,300 C200,280 300,420 500,400 C700,380 800,260 1000,280 C1200,300 1350,200 1700,240" />
+        <path d="M-50,500 C150,520 280,460 460,500 C640,540 820,460 1020,500 C1220,540 1400,480 1700,520" />
+        <path d="M-50,700 C220,660 360,780 540,740 C720,700 900,820 1100,760 C1300,700 1500,800 1700,760" />
+        <path d="M200,-50 C260,200 180,340 280,520 C380,700 240,820 320,1050" />
+        <path d="M600,-50 C660,180 540,340 620,520 C700,700 580,820 660,1050" />
+        <path d="M1000,-50 C1060,180 940,340 1020,520 C1100,700 980,820 1060,1050" />
+        <path d="M1400,-50 C1460,180 1340,340 1420,520 C1500,700 1380,820 1460,1050" />
+      </g>
+      <g stroke="#7BC9E8" stroke-width="0.6" fill="none" opacity="0.5">
+        <path d="M100,400 C200,380 260,440 360,420" />
+        <path d="M460,200 C540,180 600,240 700,220" />
+        <path d="M820,600 C920,580 980,640 1080,620" />
+        <path d="M1200,360 C1280,340 1340,400 1440,380" />
+        <path d="M300,800 C400,780 460,840 560,820" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="brand" aria-label="ANGel home">
+        <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7BC9E8"/>
+              <stop offset="100%" stop-color="#1E5A8A"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="29" fill="none" stroke="url(#markGrad)" stroke-width="2"/>
+          <g stroke="url(#markGrad)" stroke-width="2" stroke-linecap="round" fill="none">
+            <path d="M14,40 C20,30 22,22 30,16"/>
+            <path d="M18,46 C24,36 26,26 34,18"/>
+            <path d="M22,50 C28,40 30,30 38,22"/>
+            <path d="M28,52 C34,42 36,32 44,24"/>
+            <path d="M34,52 C40,42 42,32 48,28"/>
+            <path d="M40,48 C44,40 46,34 50,32"/>
+          </g>
+        </svg>
+        <span class="brand-word"><span class="an">AN</span><span class="gel">Gel</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="menuPanel">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="menu-panel" id="menuPanel" aria-hidden="true">
+        <button class="menu-close" id="menuClose" aria-label="Close menu">&times;</button>
+        <ol class="menu-list">
+          <li><a href="#hero" data-num="01">Home</a></li>
+          <li><a href="#product" data-num="02">Product</a></li>
+          <li><a href="#needs" data-num="03">The Need</a></li>
+          <li><a href="#competition" data-num="04">Competition</a></li>
+          <li><a href="#market" data-num="05">Market</a></li>
+          <li><a href="#team" data-num="06">Team</a></li>
+          <li><a href="#pitch" data-num="07">Pitch</a></li>
+        </ol>
+        <div class="menu-footer">
+          <p>Liukocyte BioSciences</p>
+          <p>UC Irvine · Department of Biomedical Engineering</p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="eyebrow reveal" data-reveal>LIUKOCYTE BIOSCIENCES · UC IRVINE</p>
+        <h1 class="hero-title">
+          <span class="title-line reveal" data-reveal data-reveal-delay="100">Immune</span>
+          <span class="title-line title-accent reveal" data-reveal data-reveal-delay="200">Innovation</span>
+          <span class="title-line reveal" data-reveal data-reveal-delay="300">for Active Healing.</span>
+        </h1>
+        <p class="hero-sub reveal" data-reveal data-reveal-delay="450">
+          ANGel is an engineered bioactive hydrogel that takes advantage of your body's
+          own healing methods to rebuild wounds — not just cover them.
+        </p>
+        <div class="hero-cta reveal" data-reveal data-reveal-delay="600">
+          <a href="#product" class="btn btn-primary">Discover ANGel</a>
+          <a href="#pitch" class="btn btn-ghost">Watch the Pitch</a>
+        </div>
+      </div>
+
+      <!-- Wound healing animation -->
+      <div class="hero-visual reveal" data-reveal data-reveal-delay="350">
+        <svg class="healing-svg" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" aria-label="Wound healing animation">
+          <defs>
+            <radialGradient id="skinGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1a2230"/>
+              <stop offset="100%" stop-color="#0a0d16"/>
+            </radialGradient>
+            <linearGradient id="vesselGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F58A4B"/>
+              <stop offset="100%" stop-color="#3FA3D1"/>
+            </linearGradient>
+            <radialGradient id="healGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7BC9E8" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#7BC9E8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- skin disc -->
+          <circle cx="260" cy="260" r="240" fill="url(#skinGrad)" stroke="#1a2330" stroke-width="2"/>
+
+          <!-- healing glow pulse -->
+          <circle class="heal-glow" cx="260" cy="260" r="180" fill="url(#healGlow)"/>
+
+          <!-- wound that closes -->
+          <path class="wound-path" d="M170,260 Q260,180 350,260 Q260,340 170,260 Z"
+                fill="#2a0f0f" stroke="#5a1a1a" stroke-width="2"/>
+
+          <!-- regenerating blood vessels (animated draw) -->
+          <g stroke="url(#vesselGrad)" stroke-width="2.5" stroke-linecap="round" fill="none">
+            <path class="vessel v1" d="M180,260 C220,240 240,290 280,270 C320,250 340,300 380,280"/>
+            <path class="vessel v2" d="M200,290 C240,310 260,260 300,290 C340,320 360,270 400,300"/>
+            <path class="vessel v3" d="M260,180 C280,220 250,260 280,300 C310,340 270,380 290,420"/>
+            <path class="vessel v4" d="M220,200 C240,250 280,260 260,310"/>
+            <path class="vessel v5" d="M320,220 C340,260 300,280 320,330"/>
+          </g>
+
+          <!-- neutrophil dots (immune cells migrating in) -->
+          <g class="cells">
+            <circle class="cell c1" cx="120" cy="180" r="6" fill="#F58A4B"/>
+            <circle class="cell c2" cx="420" cy="200" r="5" fill="#F39966"/>
+            <circle class="cell c3" cx="140" cy="380" r="5" fill="#7BC9E8"/>
+            <circle class="cell c4" cx="400" cy="360" r="6" fill="#3FA3D1"/>
+            <circle class="cell c5" cx="260" cy="120" r="4" fill="#F58A4B"/>
+            <circle class="cell c6" cx="260" cy="420" r="4" fill="#3FA3D1"/>
+          </g>
+
+          <!-- outer ring -->
+          <circle cx="260" cy="260" r="240" fill="none" stroke="url(#vesselGrad)" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <a href="#product" class="scroll-cue" aria-label="Scroll down">
+        <span class="scroll-cue-line"></span>
+        <span class="scroll-cue-text">SCROLL</span>
+      </a>
+    </section>
+
+    <!-- ============ PRODUCT ============ -->
+    <section id="product" class="section">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">01</span>
+          <h2 class="section-title">An Engineered Bioactive Hydrogel<br/><span class="text-grad">for Enhanced Angiogenesis</span></h2>
+          <p class="section-kicker">Healing factors from your own immune cells — delivered directly to the wound.</p>
+        </div>
+
+        <div class="product-grid">
+          <div class="product-copy reveal" data-reveal>
+            <p>
+              ANGel delivers special healing factors derived from neutrophils — a type of immune cell —
+              into the wound bed through a hydrogel carrier. These factors shift the wound from a chronic
+              inflammatory state to a pro-repair state by activating the body's macrophages.
+            </p>
+            <p>
+              The result: organized skin formation, decreased scarring, and a wound site rich with new
+              blood vessels — the critical prerequisite for successful skin grafting.
+            </p>
+            <ul class="feature-list">
+              <li><strong>PEG-NHS-PLL composition</strong> — antimicrobial by design</li>
+              <li><strong>Dual-barrel syringe delivery</strong> — fits tunneling or large wounds</li>
+              <li><strong>$260 to manufacture</strong> vs. $10,000 for competitors</li>
+              <li><strong>Workflow-compatible</strong> with existing surgical procedures</li>
+            </ul>
+          </div>
+
+          <!-- Dual-barrel syringe SVG -->
+          <div class="syringe-wrap reveal" data-reveal data-reveal-delay="200">
+            <svg class="syringe" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" aria-label="Dual-barrel syringe">
+              <defs>
+                <linearGradient id="barrel1" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#7BC9E8" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#3FA3D1" stop-opacity="0.85"/>
+                </linearGradient>
+                <linearGradient id="barrel2" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#F58A4B" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#d56a2a" stop-opacity="0.85"/>
+                </linearGradient>
+                <linearGradient id="mixGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#F58A4B"/>
+                  <stop offset="100%" stop-color="#3FA3D1"/>
+                </linearGradient>
+                <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#d8dde6"/>
+                  <stop offset="50%" stop-color="#9aa3b2"/>
+                  <stop offset="100%" stop-color="#5b6675"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Plunger handles -->
+              <rect x="20" y="80"  width="20" height="80" rx="3" fill="url(#metal)"/>
+              <rect x="20" y="200" width="20" height="80" rx="3" fill="url(#metal)"/>
+              <rect x="0"  y="85"  width="20" height="20" fill="url(#metal)"/>
+              <rect x="0"  y="255" width="20" height="20" fill="url(#metal)"/>
+
+              <!-- Plunger shafts -->
+              <rect x="40" y="110" width="80" height="20" fill="#cfd5df"/>
+              <rect x="40" y="230" width="80" height="20" fill="#cfd5df"/>
+
+              <!-- Finger flange -->
+              <rect x="120" y="60" width="14" height="80" rx="3" fill="#cfd5df"/>
+              <rect x="120" y="220" width="14" height="80" rx="3" fill="#cfd5df"/>
+
+              <!-- Top barrel (blue – hydrogel base) -->
+              <rect x="134" y="80" width="260" height="80" rx="6" fill="url(#barrel1)" stroke="#7BC9E8" stroke-width="1.5"/>
+              <!-- barrel graduations -->
+              <g stroke="#0a0d16" stroke-width="1" opacity="0.4">
+                <line x1="170" y1="80" x2="170" y2="95"/>
+                <line x1="210" y1="80" x2="210" y2="95"/>
+                <line x1="250" y1="80" x2="250" y2="95"/>
+                <line x1="290" y1="80" x2="290" y2="95"/>
+                <line x1="330" y1="80" x2="330" y2="95"/>
+                <line x1="370" y1="80" x2="370" y2="95"/>
+              </g>
+
+              <!-- Bottom barrel (orange – AN factor) -->
+              <rect x="134" y="200" width="260" height="80" rx="6" fill="url(#barrel2)" stroke="#F58A4B" stroke-width="1.5"/>
+              <g stroke="#0a0d16" stroke-width="1" opacity="0.4">
+                <line x1="170" y1="200" x2="170" y2="215"/>
+                <line x1="210" y1="200" x2="210" y2="215"/>
+                <line x1="250" y1="200" x2="250" y2="215"/>
+                <line x1="290" y1="200" x2="290" y2="215"/>
+                <line x1="330" y1="200" x2="330" y2="215"/>
+                <line x1="370" y1="200" x2="370" y2="215"/>
+              </g>
+
+              <!-- Convergence neck -->
+              <path d="M394,80 L430,150 L394,160 Z" fill="url(#barrel1)" stroke="#7BC9E8" stroke-width="1.5"/>
+              <path d="M394,200 L430,210 L394,280 Z" fill="url(#barrel2)" stroke="#F58A4B" stroke-width="1.5"/>
+
+              <!-- Mixing chamber -->
+              <rect x="430" y="150" width="50" height="60" rx="4" fill="url(#mixGrad)" opacity="0.85"/>
+
+              <!-- Static needle -->
+              <rect x="480" y="170" width="100" height="20" fill="url(#metal)"/>
+              <polygon points="580,170 600,180 580,190" fill="#9aa3b2"/>
+
+              <!-- Animated droplet stream -->
+              <g class="droplets">
+                <circle class="drop d1" cx="600" cy="180" r="4" fill="url(#mixGrad)"/>
+                <circle class="drop d2" cx="600" cy="180" r="3" fill="url(#mixGrad)"/>
+                <circle class="drop d3" cx="600" cy="180" r="4" fill="url(#mixGrad)"/>
+              </g>
+            </svg>
+            <p class="syringe-label">Dual-barrel applicator · Hydrogel + AN factor</p>
+          </div>
+        </div>
+
+        <!-- 4-step workflow -->
+        <div class="workflow reveal" data-reveal>
+          <h3 class="workflow-title">As simple as 4 steps</h3>
+          <ol class="workflow-steps">
+            <li><span class="step-num">1</span><p><strong>Debride</strong> dead tissue from the wound bed</p></li>
+            <li><span class="step-num">2</span><p>Apply <strong>ANGel hydrogel</strong> + AN factor dressing</p></li>
+            <li><span class="step-num">3</span><p>Apply and secure a <strong>biodegradable temporizing matrix</strong></p></li>
+            <li><span class="step-num">4</span><p><strong>Wrap</strong> the wound with dressing</p></li>
+          </ol>
+        </div>
+
+        <div class="indication-row reveal" data-reveal>
+          <span class="pill">Burns</span>
+          <span class="pill">Chronic Wounds</span>
+          <span class="pill">Skin Graft Prep</span>
+          <span class="pill">Full Thickness Wounds</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEEDS ============ -->
+    <section id="needs" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">02</span>
+          <h2 class="section-title">Wounds stuck in inflammation<br/><span class="text-grad">can't heal themselves.</span></h2>
+          <p class="section-kicker">Passive protection isn't enough. Wounds need activation.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card reveal" data-reveal>
+            <p class="stat-num">160,000</p>
+            <p class="stat-label">Skin grafts performed annually in the U.S. — to treat severe burns, diabetic ulcers, and chronic wounds.</p>
+          </div>
+          <div class="stat-card reveal" data-reveal data-reveal-delay="120">
+            <p class="stat-num">1<span class="stat-sub">in</span>4</p>
+            <p class="stat-label">Skin graft procedures fail on average — due to poor wound integration and delayed tissue regeneration.</p>
+          </div>
+          <div class="stat-card reveal" data-reveal data-reveal-delay="240">
+            <p class="stat-num">$32<span class="stat-sub">B</span></p>
+            <p class="stat-label">Annual economic burden of chronic wounds in the United States.</p>
+          </div>
+        </div>
+
+        <div class="needs-body reveal" data-reveal>
+          <p>
+            Chronic wounds are a major clinical challenge for patients with diabetes, vascular disease, and old age —
+            conditions where even small lesions can fail to heal properly. Wounds remain stuck in a prolonged state
+            of inflammation and struggle to reach the proliferation stage where new blood vessels grow and skin
+            cells migrate into the wound bed.
+          </p>
+          <p>
+            Wound healing and skin graft success ultimately depend on effective <strong>vascularization</strong> of the
+            wound bed. Angiogenesis is promoted by anti-inflammatory <strong>M2 macrophage</strong> signaling.
+            Chronic inflammation prevents pro-inflammatory M1 macrophages from differentiating into their
+            pro-regenerative M2 state. When angiogenesis is prolonged or inhibited, infection wins.
+          </p>
+        </div>
+
+        <!-- Healing-phase pipeline -->
+        <div class="phases reveal" data-reveal>
+          <div class="phase phase-stuck">
+            <span class="phase-dot"></span>
+            <p class="phase-name">Hemostasis</p>
+          </div>
+          <div class="phase phase-stuck">
+            <span class="phase-dot"></span>
+            <p class="phase-name">Inflammation</p>
+            <p class="phase-note">stuck here</p>
+          </div>
+          <div class="phase phase-blocked">
+            <span class="phase-dot"></span>
+            <p class="phase-name">Proliferation</p>
+          </div>
+          <div class="phase phase-blocked">
+            <span class="phase-dot"></span>
+            <p class="phase-name">Maturation</p>
+          </div>
+        </div>
+        <p class="phases-caption reveal" data-reveal>ANGel reactivates the path from inflammation → proliferation.</p>
+      </div>
+    </section>
+
+    <!-- ============ COMPETITION ============ -->
+    <section id="competition" class="section">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">03</span>
+          <h2 class="section-title">5 key factors. 6 competitors.<br/><span class="text-grad">One winner.</span></h2>
+          <p class="section-kicker">ANGel is the only product that scores positively across every factor.</p>
+        </div>
+
+        <div class="matrix-wrap reveal" data-reveal>
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th class="matrix-corner"></th>
+                <th>Regranex</th>
+                <th>Apligraf</th>
+                <th>Aquacel</th>
+                <th>UrgoStart</th>
+                <th>Integra</th>
+                <th>NovoSorb BTM</th>
+                <th class="us">ANGel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Inexpensive</th>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="x">✕</td>
+                <td class="c">✓</td>
+                <td class="us c">✓</td>
+              </tr>
+              <tr>
+                <th>Infrequent application</th>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="us c">✓</td>
+              </tr>
+              <tr>
+                <th>Active immune healing</th>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="us c">✓</td>
+              </tr>
+              <tr>
+                <th>Rapid blood vessel growth</th>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+                <td class="us c">✓</td>
+              </tr>
+              <tr>
+                <th>Antimicrobial</th>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="x">✕</td>
+                <td class="us c">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cost-callout reveal" data-reveal>
+          <div class="cost-side">
+            <p class="cost-label">Competitors</p>
+            <p class="cost-num cost-them">$10,000</p>
+            <p class="cost-note">per unit to manufacture</p>
+          </div>
+          <div class="cost-vs">vs.</div>
+          <div class="cost-side">
+            <p class="cost-label">ANGel</p>
+            <p class="cost-num cost-us">$260</p>
+            <p class="cost-note">per unit to manufacture</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARKET ============ -->
+    <section id="market" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">04</span>
+          <h2 class="section-title">$10 billion market by 2030.<br/><span class="text-grad">ANGel is ready.</span></h2>
+          <p class="section-kicker">Priced to accelerate adoption. Designed to scale.</p>
+        </div>
+
+        <div class="market-grid">
+          <div class="market-card reveal" data-reveal>
+            <div class="market-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M4 26h24M6 24V12l10-6 10 6v12M11 24v-8h10v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Reimbursable</h3>
+            <p>Revenue structured through health insurance reimbursement aligned with HCPCS/CPT billing codes — mirroring established competitors.</p>
+          </div>
+          <div class="market-card reveal" data-reveal data-reveal-delay="120">
+            <div class="market-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8v8l5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Workflow-Ready</h3>
+            <p>Fits the workflow surgeons, nurses, and physician assistants already use. No new training, no new equipment.</p>
+          </div>
+          <div class="market-card reveal" data-reveal data-reveal-delay="240">
+            <div class="market-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M4 20l8-8 5 5 11-11M28 6h-6M28 6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Margin to Scale</h3>
+            <p>Manufacturing at $260 vs. competitors at $10,000 creates strong margin while pricing well below market rate.</p>
+          </div>
+        </div>
+
+        <div class="market-body reveal" data-reveal>
+          <p>
+            The go-to-market approach targets plastic surgeons, wound care doctors, podiatrists, and hospital
+            procurement teams. Initial adoption is driven through clinical validation — ANGel's in vivo evidence
+            already demonstrates increased blood vessel density, improved wound closure, and macrophage-driven
+            tissue regeneration. Products are bundled (hydrogel, applicators, secondary dressings) and sold to
+            provider practices at a bulk price that remains dramatically more affordable than competing biologics.
+          </p>
+        </div>
+
+        <div class="settings reveal" data-reveal>
+          <p class="settings-label">Clinical settings</p>
+          <div class="settings-row">
+            <span class="pill">Outpatient wound care clinics</span>
+            <span class="pill">Hospital burn units</span>
+            <span class="pill">Reconstructive surgery</span>
+            <span class="pill">Podiatry</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEAM ============ -->
+    <section id="team" class="section">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">05</span>
+          <h2 class="section-title">Meet <span class="text-grad">Liukocyte BioSciences</span></h2>
+          <p class="section-kicker">Founded at UC Irvine. Backed by science. Built to commercialize.</p>
+        </div>
+
+        <div class="team-grid">
+          <article class="team-card reveal" data-reveal>
+            <div class="team-avatar"><span>DJ</span></div>
+            <h3>Devin Johnson</h3>
+            <p class="team-role">Chief Executive Officer</p>
+            <p class="team-bio">Background in biomaterial research and academic communication; leads product demonstrations, investor pitches, team coordination, and execution of company milestones.</p>
+          </article>
+          <article class="team-card reveal" data-reveal data-reveal-delay="80">
+            <div class="team-avatar"><span>CS</span></div>
+            <h3>Catherine Salgado</h3>
+            <p class="team-role">Chief Information Officer</p>
+            <p class="team-bio">Background in biomaterials and cell culture; supports experimental validation, biological integration, and product feasibility.</p>
+          </article>
+          <article class="team-card reveal" data-reveal data-reveal-delay="160">
+            <div class="team-avatar"><span>KH</span></div>
+            <h3>Kristin Hagen</h3>
+            <p class="team-role">Chief Operations Officer</p>
+            <p class="team-bio">Extensive business experience; responsible for the company's business model and client interviews — driving clinical relevance and scalability.</p>
+          </article>
+          <article class="team-card reveal" data-reveal data-reveal-delay="240">
+            <div class="team-avatar"><span>JN</span></div>
+            <h3>Jimmy Nguyen</h3>
+            <p class="team-role">Chief Financial Officer</p>
+            <p class="team-bio">Experience in materials research and engineering design; responsible for cost analysis, manufacturing feasibility, and financial stability.</p>
+          </article>
+          <article class="team-card reveal" data-reveal data-reveal-delay="320">
+            <div class="team-avatar"><span>RN</span></div>
+            <h3>Ronald Nguyen</h3>
+            <p class="team-role">Chief Technical Officer</p>
+            <p class="team-bio">Conducts biomaterial research and focuses on translating validated wet-lab findings to scalable, market-ready product design.</p>
+          </article>
+        </div>
+
+        <div class="advisor reveal" data-reveal>
+          <p class="advisor-label">Mentor</p>
+          <p class="advisor-name">Wendy Liu, Ph.D.</p>
+          <p class="advisor-aff">UCI Samueli School of Engineering · BioEngine</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PITCH VIDEO ============ -->
+    <section id="pitch" class="section section-alt">
+      <div class="container">
+        <div class="section-head reveal" data-reveal>
+          <span class="section-num">06</span>
+          <h2 class="section-title">The <span class="text-grad">ANGel Pitch</span></h2>
+          <p class="section-kicker">Built at UCI. Backed by science. Ready for the market.</p>
+        </div>
+
+        <div class="video-frame reveal" data-reveal>
+          <iframe
+            src="https://www.youtube.com/embed/315vUUdaZY8"
+            title="Liukocyte Biosciences ANGel Pitch"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-word"><span class="an">AN</span><span class="gel">Gel</span></span>
+          <p>Immune Innovation for Active Healing</p>
+        </div>
+        <div class="footer-meta">
+          <p>Liukocyte BioSciences</p>
+          <p>UC Irvine · Department of Biomedical Engineering</p>
+          <p><a href="https://angel.uci.design">angel.uci.design</a></p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
