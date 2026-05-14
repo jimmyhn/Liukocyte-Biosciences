@@ -72,7 +72,7 @@ export function VesselGrowth({ className = "", origin = "top-right" }: Props) {
           <path
             className="vg-path vg-trunk-1"
             strokeWidth="6"
-            d="M40,40 C120,70 180,160 260,220 C340,280 420,360 520,420"
+            d="M40,40 C140,90 220,170 300,250 C380,330 460,410 540,490 C580,530 610,560 640,600"
           />
           <path
             className="vg-path vg-trunk-2"
@@ -183,44 +183,36 @@ export function VesselGrowth({ className = "", origin = "top-right" }: Props) {
             d="M240,540 C260,560 280,575 310,590"
           />
         </g>
-
-        {/* Pulsing dots at branch nodes — represent blood cells at junctions */}
-        <g fill="#F58A4B">
-          <circle className="vg-node vg-node-1" cx="260" cy="220" r="3" />
-          <circle className="vg-node vg-node-2" cx="320" cy="100" r="2.5" />
-          <circle className="vg-node vg-node-3" cx="240" cy="300" r="2.5" />
-          <circle className="vg-node vg-node-4" cx="420" cy="360" r="2.5" />
-          <circle className="vg-node vg-node-5" cx="180" cy="420" r="2" />
-        </g>
       </g>
 
       <style>{`
         /* Each path animates its own stroke-draw, on a loop.
-           Different delays so vessels grow in waves, not all at once. */
+           A +6s base offset on every path means the macrophage particles
+           have time to ascend the screen before angiogenesis begins. */
         .vg-path {
           stroke-dasharray: 1000;
           stroke-dashoffset: 1000;
-          animation: vgDraw 7s ease-in-out infinite;
+          animation: vgDraw 8s ease-in-out infinite;
         }
-        .vg-trunk-1  { animation-delay: 0s;   }
-        .vg-trunk-2  { animation-delay: 0.4s; }
-        .vg-trunk-3  { animation-delay: 0.6s; }
-        .vg-branch-1 { animation-delay: 1.2s; }
-        .vg-branch-2 { animation-delay: 1.3s; }
-        .vg-branch-3 { animation-delay: 1.4s; }
-        .vg-branch-4 { animation-delay: 1.5s; }
-        .vg-branch-5 { animation-delay: 1.6s; }
-        .vg-branch-6 { animation-delay: 1.7s; }
-        .vg-cap-1    { animation-delay: 2.2s; }
-        .vg-cap-2    { animation-delay: 2.3s; }
-        .vg-cap-3    { animation-delay: 2.4s; }
-        .vg-cap-4    { animation-delay: 2.5s; }
-        .vg-cap-5    { animation-delay: 2.6s; }
-        .vg-cap-6    { animation-delay: 2.7s; }
-        .vg-cap-7    { animation-delay: 2.8s; }
-        .vg-cap-8    { animation-delay: 2.9s; }
-        .vg-cap-9    { animation-delay: 3.0s; }
-        .vg-cap-10   { animation-delay: 3.1s; }
+        .vg-trunk-1  { animation-delay: 6.0s; }
+        .vg-trunk-2  { animation-delay: 6.4s; }
+        .vg-trunk-3  { animation-delay: 6.6s; }
+        .vg-branch-1 { animation-delay: 7.2s; }
+        .vg-branch-2 { animation-delay: 7.3s; }
+        .vg-branch-3 { animation-delay: 7.4s; }
+        .vg-branch-4 { animation-delay: 7.5s; }
+        .vg-branch-5 { animation-delay: 7.6s; }
+        .vg-branch-6 { animation-delay: 7.7s; }
+        .vg-cap-1    { animation-delay: 8.2s; }
+        .vg-cap-2    { animation-delay: 8.3s; }
+        .vg-cap-3    { animation-delay: 8.4s; }
+        .vg-cap-4    { animation-delay: 8.5s; }
+        .vg-cap-5    { animation-delay: 8.6s; }
+        .vg-cap-6    { animation-delay: 8.7s; }
+        .vg-cap-7    { animation-delay: 8.8s; }
+        .vg-cap-8    { animation-delay: 8.9s; }
+        .vg-cap-9    { animation-delay: 9.0s; }
+        .vg-cap-10   { animation-delay: 9.1s; }
 
         @keyframes vgDraw {
           0%   { stroke-dashoffset: 1000; opacity: 0;   }
@@ -228,23 +220,6 @@ export function VesselGrowth({ className = "", origin = "top-right" }: Props) {
           55%  { stroke-dashoffset: 0;    opacity: 1;   }
           80%  { stroke-dashoffset: 0;    opacity: 0.95;}
           100% { stroke-dashoffset: 0;    opacity: 0;   }
-        }
-
-        .vg-node {
-          opacity: 0;
-          animation: vgPulse 7s ease-in-out infinite;
-          transform-origin: center;
-        }
-        .vg-node-1 { animation-delay: 1.5s; }
-        .vg-node-2 { animation-delay: 1.8s; }
-        .vg-node-3 { animation-delay: 2.1s; }
-        .vg-node-4 { animation-delay: 2.4s; }
-        .vg-node-5 { animation-delay: 2.7s; }
-        @keyframes vgPulse {
-          0%, 100% { opacity: 0; }
-          20%      { opacity: 0; }
-          40%, 70% { opacity: 1; }
-          85%      { opacity: 0.5; }
         }
       `}</style>
     </svg>

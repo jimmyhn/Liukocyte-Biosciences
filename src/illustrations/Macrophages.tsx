@@ -1,15 +1,18 @@
 import { useId } from "react";
 
 /**
- * Three blue M2 macrophages in the bottom-right corner of the hero,
- * releasing small white-with-blue-glow particles that drift upward —
- * visual metaphor for the cells triggering angiogenesis.
+ * M2 macrophages occupying the right-center of the hero, releasing small
+ * white-with-blue-glow particles that rise all the way to the top of the
+ * SVG (which is sized to span the full height of the hero). The particles'
+ * ascent is what visually triggers the angiogenesis above.
  *
  * Structure:
- *   - 3 organic blob shapes (paths) with a deeper-blue nucleus inside each
- *   - A swarm of ~16 particles distributed across the cells, each rising
- *     and fading in a CSS keyframe loop on its own delay
- *   - Each particle = bright inner dot + soft blue glow halo
+ *   - 1 large central macrophage + 2 smaller flanking cells, all blue,
+ *     low-opacity so they read as background atmosphere rather than
+ *     foreground subject.
+ *   - Each cell has a slow membrane "breathe" pulse.
+ *   - 18 particles distributed across the cluster, each travelling far
+ *     up the SVG (≈ 800-1000 px) on per-particle delays/durations.
  */
 export function Macrophages({ className = "" }: { className?: string }) {
   const u = useId().replace(/:/g, "");
@@ -17,45 +20,48 @@ export function Macrophages({ className = "" }: { className?: string }) {
   const gNuc  = `mc-nuc-${u}`;
   const gGlow = `mc-glow-${u}`;
 
-  // Particles: each is anchored near one of the 3 cells, with a unique
-  // upward drift, delay, and duration so the swarm feels organic.
+  // Cells are placed in the bottom-middle of the SVG; particles travel
+  // from there up through the full viewBox height (1200 px).
   const particles = [
-    { cx: 360, cy: 380, dx:  -20, dy: -260, dur: 6.5, delay: 0.0 },
-    { cx: 380, cy: 360, dx:   10, dy: -300, dur: 7.5, delay: 0.6 },
-    { cx: 410, cy: 400, dx:  -40, dy: -250, dur: 6.0, delay: 1.2 },
-    { cx: 440, cy: 370, dx:   20, dy: -330, dur: 7.0, delay: 1.8 },
-    { cx: 460, cy: 410, dx:  -10, dy: -280, dur: 6.8, delay: 0.3 },
-    { cx: 500, cy: 380, dx:   30, dy: -290, dur: 7.2, delay: 0.9 },
-    { cx: 520, cy: 420, dx:    0, dy: -310, dur: 6.4, delay: 1.5 },
-    { cx: 560, cy: 360, dx:  -25, dy: -270, dur: 7.6, delay: 2.1 },
-    { cx: 540, cy: 400, dx:   15, dy: -300, dur: 6.6, delay: 0.4 },
-    { cx: 590, cy: 410, dx:   -5, dy: -260, dur: 7.0, delay: 1.0 },
-    { cx: 610, cy: 380, dx:   25, dy: -320, dur: 6.8, delay: 1.6 },
-    { cx: 480, cy: 350, dx:    5, dy: -280, dur: 7.4, delay: 2.4 },
-    { cx: 430, cy: 360, dx:   35, dy: -240, dur: 6.2, delay: 0.7 },
-    { cx: 380, cy: 410, dx:  -30, dy: -290, dur: 7.3, delay: 1.3 },
-    { cx: 560, cy: 420, dx:   10, dy: -260, dur: 6.7, delay: 1.9 },
-    { cx: 600, cy: 350, dx:  -15, dy: -310, dur: 7.1, delay: 2.6 },
+    { cx: 300, cy: 900,  dx:  -20, dy: -820, dur: 8.5, delay: 0.0 },
+    { cx: 360, cy: 920,  dx:   30, dy: -870, dur: 9.0, delay: 0.6 },
+    { cx: 420, cy: 880,  dx:  -10, dy: -800, dur: 8.0, delay: 1.2 },
+    { cx: 480, cy: 940,  dx:   20, dy: -880, dur: 9.5, delay: 1.8 },
+    { cx: 540, cy: 900,  dx:  -25, dy: -830, dur: 8.8, delay: 0.3 },
+    { cx: 600, cy: 940,  dx:   35, dy: -900, dur: 9.2, delay: 0.9 },
+    { cx: 360, cy: 980,  dx:   10, dy: -880, dur: 8.4, delay: 1.5 },
+    { cx: 440, cy: 1020, dx:  -30, dy: -940, dur: 9.6, delay: 2.1 },
+    { cx: 540, cy: 1000, dx:    5, dy: -920, dur: 8.6, delay: 0.4 },
+    { cx: 600, cy: 1050, dx:  -10, dy: -960, dur: 9.0, delay: 1.0 },
+    { cx: 480, cy: 1060, dx:   25, dy: -990, dur: 8.8, delay: 1.6 },
+    { cx: 280, cy: 1000, dx:   15, dy: -920, dur: 9.4, delay: 2.4 },
+    { cx: 420, cy: 1100, dx:    0, dy:-1020, dur: 9.2, delay: 0.7 },
+    { cx: 540, cy: 1080, dx:   30, dy:-1000, dur: 8.6, delay: 1.3 },
+    { cx: 380, cy: 1050, dx:  -20, dy: -970, dur: 9.3, delay: 1.9 },
+    { cx: 460, cy: 980,  dx:   10, dy: -900, dur: 8.7, delay: 2.6 },
+    { cx: 320, cy: 940,  dx:   40, dy: -860, dur: 9.1, delay: 3.0 },
+    { cx: 580, cy: 1020, dx:  -15, dy: -940, dur: 8.9, delay: 3.3 },
   ];
 
   return (
     <svg
-      viewBox="0 0 700 600"
+      viewBox="0 0 700 1200"
+      preserveAspectRatio="xMidYMax slice"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
       <defs>
-        {/* Cell body — pale-to-mid blue */}
+        {/* Cell body — pale-to-mid blue, intentionally low opacity */}
         <radialGradient id={gCell} cx="40%" cy="40%" r="65%">
-          <stop offset="0%"   stopColor="#9CD9F0" stopOpacity="0.95" />
-          <stop offset="60%"  stopColor="#5BB0DA" stopOpacity="0.85" />
-          <stop offset="100%" stopColor="#1E5A8A" stopOpacity="0.85" />
+          <stop offset="0%"   stopColor="#9CD9F0" stopOpacity="0.55" />
+          <stop offset="60%"  stopColor="#5BB0DA" stopOpacity="0.40" />
+          <stop offset="100%" stopColor="#1E5A8A" stopOpacity="0.35" />
         </radialGradient>
-        {/* Nucleus — deeper blue */}
+        {/* Nucleus — deeper blue but still soft */}
         <radialGradient id={gNuc} cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#3FA3D1" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#10406b" stopOpacity="0.95" />
+          <stop offset="0%"   stopColor="#3FA3D1" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#10406b" stopOpacity="0.60" />
         </radialGradient>
         {/* Particle glow — soft blue halo */}
         <radialGradient id={gGlow} cx="50%" cy="50%" r="50%">
@@ -65,7 +71,61 @@ export function Macrophages({ className = "" }: { className?: string }) {
         </radialGradient>
       </defs>
 
-      {/* === Particles (rendered first so cells sit on top of their origin) === */}
+      {/* === Cells (drawn first, particles overlay them) === */}
+      {/* Left smaller cell */}
+      <g className="mc-cell mc-cell-1">
+        <path
+          fill={`url(#${gCell})`}
+          stroke="#7BC9E8"
+          strokeOpacity="0.18"
+          strokeWidth="1.2"
+          d="M260,1100
+             C230,1090 210,1064 214,1034
+             C218,1000 246,978 280,978
+             C312,968 350,984 362,1016
+             C376,1038 372,1070 350,1090
+             C328,1108 290,1110 260,1100 Z"
+        />
+        <ellipse cx="294" cy="1024" rx="22" ry="18" fill={`url(#${gNuc})`} />
+      </g>
+
+      {/* Large central macrophage — the focal cell, in the right-middle of the SVG */}
+      <g className="mc-cell mc-cell-2">
+        <path
+          fill={`url(#${gCell})`}
+          stroke="#7BC9E8"
+          strokeOpacity="0.22"
+          strokeWidth="1.6"
+          d="M480,1140
+             C432,1132 392,1100 384,1052
+             C374,1000 404,948 452,924
+             C496,902 558,902 598,924
+             C642,944 668,988 670,1036
+             C672,1086 642,1136 596,1158
+             C552,1174 510,1166 480,1140 Z"
+        />
+        <ellipse cx="528" cy="1030" rx="36" ry="30" fill={`url(#${gNuc})`} />
+      </g>
+
+      {/* Right smaller cell */}
+      <g className="mc-cell mc-cell-3">
+        <path
+          fill={`url(#${gCell})`}
+          stroke="#7BC9E8"
+          strokeOpacity="0.18"
+          strokeWidth="1.2"
+          d="M168,1010
+             C146,1000 132,978 134,956
+             C136,932 156,914 180,910
+             C204,902 232,914 244,936
+             C258,952 258,978 244,994
+             C232,1010 208,1018 184,1014
+             C180,1014 172,1012 168,1010 Z"
+        />
+        <ellipse cx="186" cy="958" rx="20" ry="16" fill={`url(#${gNuc})`} />
+      </g>
+
+      {/* === Particles === */}
       <g>
         {particles.map((p, i) => (
           <g
@@ -81,79 +141,26 @@ export function Macrophages({ className = "" }: { className?: string }) {
             }
           >
             {/* glow halo */}
-            <circle cx={p.cx} cy={p.cy} r="6" fill={`url(#${gGlow})`} />
-            {/* bright inner dot — off-white, not pure white so it stays soft */}
-            <circle cx={p.cx} cy={p.cy} r="1.4" fill="#e6edf5" opacity="0.85" />
+            <circle cx={p.cx} cy={p.cy} r="7" fill={`url(#${gGlow})`} />
+            {/* bright inner dot — off-white, intentionally soft */}
+            <circle cx={p.cx} cy={p.cy} r="1.6" fill="#e6edf5" opacity="0.85" />
           </g>
         ))}
-      </g>
-
-      {/* === Macrophage 1 — back, smaller, upper === */}
-      <g className="mc-cell mc-cell-1">
-        <path
-          fill={`url(#${gCell})`}
-          stroke="#7BC9E8"
-          strokeOpacity="0.35"
-          strokeWidth="1.2"
-          d="M380,360
-             C360,346 350,332 360,316
-             C370,300 388,294 408,300
-             C424,294 442,302 450,320
-             C462,332 460,352 448,366
-             C440,380 420,386 402,378
-             C390,376 384,372 380,360 Z"
-        />
-        <ellipse cx="410" cy="334" rx="14" ry="11" fill={`url(#${gNuc})`} />
-      </g>
-
-      {/* === Macrophage 2 — large, center === */}
-      <g className="mc-cell mc-cell-2">
-        <path
-          fill={`url(#${gCell})`}
-          stroke="#7BC9E8"
-          strokeOpacity="0.4"
-          strokeWidth="1.4"
-          d="M460,470
-             C432,468 412,452 408,428
-             C402,398 420,372 446,360
-             C470,348 502,348 526,360
-             C552,370 568,392 568,420
-             C570,448 552,476 524,488
-             C498,498 472,494 460,470 Z"
-        />
-        <ellipse cx="488" cy="418" rx="22" ry="18" fill={`url(#${gNuc})`} />
-      </g>
-
-      {/* === Macrophage 3 — right, medium === */}
-      <g className="mc-cell mc-cell-3">
-        <path
-          fill={`url(#${gCell})`}
-          stroke="#7BC9E8"
-          strokeOpacity="0.35"
-          strokeWidth="1.2"
-          d="M600,440
-             C580,438 564,422 562,400
-             C560,380 574,360 594,354
-             C614,346 638,354 650,372
-             C664,386 666,408 654,424
-             C644,440 624,450 606,446
-             C604,446 602,442 600,440 Z"
-        />
-        <ellipse cx="610" cy="394" rx="16" ry="13" fill={`url(#${gNuc})`} />
       </g>
 
       <style>{`
         /* Subtle membrane breathing — slow scale pulse */
         .mc-cell { transform-origin: center; }
-        .mc-cell-1 { animation: mcBreathe 5.5s ease-in-out infinite; }
-        .mc-cell-2 { animation: mcBreathe 6.5s ease-in-out infinite 0.6s; }
-        .mc-cell-3 { animation: mcBreathe 6.0s ease-in-out infinite 1.1s; }
+        .mc-cell-1 { animation: mcBreathe 5.5s ease-in-out infinite;        }
+        .mc-cell-2 { animation: mcBreathe 6.5s ease-in-out infinite 0.6s;   }
+        .mc-cell-3 { animation: mcBreathe 6.0s ease-in-out infinite 1.1s;   }
         @keyframes mcBreathe {
           0%, 100% { transform: scale(1);    }
-          50%      { transform: scale(1.03); }
+          50%      { transform: scale(1.025);}
         }
 
-        /* Particles rise + fade in a loop. dx/dy are CSS vars set per particle. */
+        /* Particles ascend the full SVG height + fade. The per-particle
+           CSS vars --mc-dx/--mc-dy set the travel distance. */
         .mc-p {
           opacity: 0;
           animation-name: mcParticle;
@@ -162,8 +169,8 @@ export function Macrophages({ className = "" }: { className?: string }) {
         }
         @keyframes mcParticle {
           0%   { transform: translate(0,0);                         opacity: 0; }
-          10%  {                                                    opacity: 1; }
-          70%  {                                                    opacity: 0.7; }
+          8%   {                                                    opacity: 1; }
+          80%  {                                                    opacity: 0.7;}
           100% { transform: translate(var(--mc-dx), var(--mc-dy));  opacity: 0; }
         }
       `}</style>

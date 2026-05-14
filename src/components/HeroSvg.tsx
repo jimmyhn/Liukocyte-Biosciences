@@ -18,9 +18,10 @@ export function HeroSvg() {
         <VesselGrowth origin="top-right" className="h-full w-full" />
       </div>
 
-      {/* M2 macrophages with particle release — bottom-right */}
+      {/* M2 macrophages — fill the right-center of the hero, full height,
+          so particles can ascend all the way up to where the vessels grow. */}
       <div
-        className="pointer-events-none absolute -bottom-16 -right-24 md:right-0 md:bottom-0 w-[48vw] max-w-[680px] aspect-[7/6] opacity-95"
+        className="pointer-events-none absolute inset-y-0 right-0 w-[55vw] max-w-[720px]"
         aria-hidden="true"
       >
         <Macrophages className="h-full w-full" />
