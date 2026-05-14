@@ -1,7 +1,10 @@
+node_modules/
+dist/
+dist-ssr/
+.vite/
 .DS_Store
 Thumbs.db
 *.log
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 .idea/
-node_modules/
-dist/
