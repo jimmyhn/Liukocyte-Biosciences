@@ -14,7 +14,7 @@ export function Logo({ className = "", showMark = true }: Props) {
       {showMark && (
         <span
           aria-hidden="true"
-          className="grid h-9 w-9 place-items-center overflow-hidden rounded-full bg-black"
+          className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full bg-black ring-1 ring-white/5"
         >
           <img
             src="/logo-mark.png"
@@ -24,7 +24,7 @@ export function Logo({ className = "", showMark = true }: Props) {
           />
         </span>
       )}
-      <span className="font-display text-[22px] font-semibold tracking-tight">
+      <span className="font-display text-[26px] leading-none font-semibold tracking-tight">
         <span className="text-angel-orange">AN</span>
         <span className="text-grad-cool">Gel</span>
       </span>
