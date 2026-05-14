@@ -41,14 +41,20 @@ export function Nav() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "py-3 bg-black/85 backdrop-blur-md hairline-b"
-            : "py-5 bg-gradient-to-b from-black/60 to-transparent"
-        }`}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
+      <header className="fixed inset-x-0 top-0 z-50 py-4">
+        {/* Backdrop — fades opacity + blur smoothly with scroll. No border, so nothing snaps. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 transition-[opacity,backdrop-filter] duration-500 ease-out"
+          style={{
+            opacity: scrolled ? 1 : 0,
+            backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
+            WebkitBackdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
           <a href="#hero" aria-label="ANGel home" className="block">
             <Logo />
           </a>

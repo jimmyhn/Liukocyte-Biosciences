@@ -94,9 +94,6 @@ export function HeroSvg() {
           ))}
         </motion.dl>
       </div>
-
-      {/* hairline divider at bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
     </section>
   );
 }
