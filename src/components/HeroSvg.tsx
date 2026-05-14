@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { fadeUp, stagger } from "../lib/motion";
 import { VesselGrowth } from "../illustrations/VesselGrowth";
+import { Macrophages } from "../illustrations/Macrophages";
 
 export function HeroSvg() {
   return (
@@ -17,8 +18,16 @@ export function HeroSvg() {
         <VesselGrowth origin="top-right" className="h-full w-full" />
       </div>
 
+      {/* M2 macrophages with particle release — bottom-right */}
+      <div
+        className="pointer-events-none absolute -bottom-16 -right-24 md:right-0 md:bottom-0 w-[48vw] max-w-[680px] aspect-[7/6] opacity-95"
+        aria-hidden="true"
+      >
+        <Macrophages className="h-full w-full" />
+      </div>
+
       {/* Editorial typographic hero */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10 pt-40 pb-24 md:pb-32">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10 pt-40 pb-8 md:pb-10">
         <motion.div
           variants={stagger(0.1, 0.08)}
           initial="hidden"

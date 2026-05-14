@@ -128,7 +128,7 @@ export function VesselGrowth({ className = "", origin = "top-right" }: Props) {
         {/* === Fine capillaries (thin, drawn last, blue tinted) === */}
         <g
           fill="none"
-          stroke={`url(#${gBlue})`}
+          stroke={`url(#${gOrange})`}
           strokeLinecap="round"
           strokeLinejoin="round"
         >
