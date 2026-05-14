@@ -12,17 +12,13 @@ export function Logo({ className = "", showMark = true }: Props) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       {showMark && (
-        <span
+        <img
+          src="/logo-mark.png"
+          alt=""
           aria-hidden="true"
-          className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full bg-black ring-1 ring-white/5"
-        >
-          <img
-            src="/logo-mark.png"
-            alt=""
-            className="h-full w-full object-cover"
-            draggable={false}
-          />
-        </span>
+          draggable={false}
+          className="block h-12 w-12 shrink-0 select-none rounded-full object-cover"
+        />
       )}
       <span className="font-display text-[26px] leading-none font-semibold tracking-tight">
         <span className="text-angel-orange">AN</span>
