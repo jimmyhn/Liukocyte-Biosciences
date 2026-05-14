@@ -3,6 +3,7 @@ import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
 import { HealingPhases } from "../illustrations/HealingPhases";
 import { ExistingFallShort } from "../illustrations/ExistingFallShort";
+import { ScrollCue } from "./ScrollCue";
 
 const stats = [
   { num: "160,000", label: "Skin grafts performed annually in the U.S." },
@@ -94,6 +95,10 @@ export function Needs() {
           </p>
         </div>
         <ExistingFallShort />
+      </div>
+
+      <div className="mt-16 flex justify-center">
+        <ScrollCue label="Product" href="#product" />
       </div>
     </Section>
   );

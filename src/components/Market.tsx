@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
 import { MarketGrowth } from "../illustrations/MarketGrowth";
+import { ScrollCue } from "./ScrollCue";
 
 const pillars = [
   {
@@ -133,6 +134,10 @@ export function Market() {
           ))}
         </div>
       </motion.div>
+
+      <div className="mt-16 flex justify-center">
+        <ScrollCue label="Team" href="#team" />
+      </div>
     </Section>
   );
 }

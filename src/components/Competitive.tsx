@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
 import { CompetitiveMatrix } from "../illustrations/CompetitiveMatrix";
+import { ScrollCue } from "./ScrollCue";
 
 export function Competitive() {
   return (
@@ -64,6 +65,10 @@ export function Competitive() {
           <p className="mt-2 text-xs text-bone-400">per unit to manufacture</p>
         </div>
       </motion.div>
+
+      <div className="mt-16 flex justify-center">
+        <ScrollCue label="Market" href="#market" />
+      </div>
     </Section>
   );
 }

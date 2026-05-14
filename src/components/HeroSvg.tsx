@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { fadeUp, stagger } from "../lib/motion";
 import { VesselGrowth } from "../illustrations/VesselGrowth";
 import { Macrophages } from "../illustrations/Macrophages";
+import { ScrollCue } from "./ScrollCue";
 
 export function HeroSvg() {
   return (
@@ -18,8 +19,7 @@ export function HeroSvg() {
         <VesselGrowth origin="top-right" className="h-full w-full" />
       </div>
 
-      {/* M2 macrophages — fill the right-center of the hero, full height,
-          so particles can ascend all the way up to where the vessels grow. */}
+      {/* M2 macrophages — full-height right panel; particles ascend to vessels */}
       <div
         className="pointer-events-none absolute inset-y-0 right-0 w-[55vw] max-w-[720px]"
         aria-hidden="true"
@@ -27,8 +27,8 @@ export function HeroSvg() {
         <Macrophages className="h-full w-full" />
       </div>
 
-      {/* Editorial typographic hero */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10 pt-40 pb-8 md:pb-10">
+      {/* Editorial typographic hero — same px/max-w pattern as Section */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-10 pt-32">
         <motion.div
           variants={stagger(0.1, 0.08)}
           initial="hidden"
@@ -39,7 +39,7 @@ export function HeroSvg() {
             variants={fadeUp}
             className="font-mono text-xs uppercase tracking-[0.35em] text-angel-sky mb-10"
           >
-            Liukocyte BioSciences · UC Irvine BME
+            Liukocyte BioSciences · UC Irvine
           </motion.p>
 
           <motion.h1
@@ -65,7 +65,7 @@ export function HeroSvg() {
             className="mt-12 flex flex-wrap items-center gap-3"
           >
             <a
-              href="#product"
+              href="#needs"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-bone-100"
             >
               Discover ANGel
@@ -79,31 +79,14 @@ export function HeroSvg() {
             </a>
           </motion.div>
         </motion.div>
-
-        {/* Stat strip along the bottom */}
-        <motion.dl
-          variants={stagger(0.6, 0.12)}
-          initial="hidden"
-          animate="show"
-          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 max-w-4xl"
-        >
-          {[
-            ["160K", "Skin grafts / yr in the U.S."],
-            ["1 in 4", "Graft procedures that fail"],
-            ["$32B", "Chronic wound burden, U.S."],
-            ["$260", "Mfg cost vs $10K competitors"],
-          ].map(([num, lbl]) => (
-            <motion.div key={num} variants={fadeUp}>
-              <dt className="font-display text-3xl md:text-4xl font-semibold text-grad">
-                {num}
-              </dt>
-              <dd className="mt-1 text-xs md:text-sm text-bone-400 leading-tight">
-                {lbl}
-              </dd>
-            </motion.div>
-          ))}
-        </motion.dl>
       </div>
+
+      {/* Scroll cue — absolute, bottom-center of hero */}
+      <ScrollCue
+        label="The Need"
+        href="#needs"
+        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2"
+      />
     </section>
   );
 }

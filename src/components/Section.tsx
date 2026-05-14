@@ -11,11 +11,8 @@ type Props = {
 
 export function Section({ id, className = "", children }: Props) {
   return (
-    <section
-      id={id}
-      className={`relative py-8 md:py-10 px-6 md:px-10 ${className}`}
-    >
-      <div className="mx-auto max-w-7xl">{children}</div>
+    <section id={id} className={`relative py-8 md:py-10 ${className}`}>
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-10">{children}</div>
     </section>
   );
 }

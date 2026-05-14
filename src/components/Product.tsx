@@ -4,6 +4,7 @@ import { fadeUp, stagger } from "../lib/motion";
 import { DualSyringe } from "../illustrations/DualSyringe";
 import { SkinCrossSection } from "../illustrations/SkinCrossSection";
 import { ClinicalWorkflow } from "../illustrations/ClinicalWorkflow";
+import { ScrollCue } from "./ScrollCue";
 
 const features = [
   {
@@ -148,6 +149,10 @@ export function Product() {
           </motion.span>
         ))}
       </motion.div>
+
+      <div className="mt-16 flex justify-center">
+        <ScrollCue label="Competition" href="#competition" />
+      </div>
     </Section>
   );
 }

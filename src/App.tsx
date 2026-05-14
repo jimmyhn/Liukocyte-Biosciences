@@ -33,8 +33,8 @@ export default function App() {
       <Nav />
       <main>
         {heroVariant === "video" ? <HeroVideo /> : <HeroSvg />}
-        <Product />
         <Needs />
+        <Product />
         <Competitive />
         <Market />
         <Team />

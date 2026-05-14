@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
+import { ScrollCue } from "./ScrollCue";
 
 type Member = { name: string; role: string; bio: string };
 
@@ -116,6 +117,10 @@ export function Team() {
           UCI Samueli School of Engineering · BioEngine
         </p>
       </motion.div>
+
+      <div className="mt-16 flex justify-center">
+        <ScrollCue label="Pitch" href="#pitch" />
+      </div>
     </Section>
   );
 }
