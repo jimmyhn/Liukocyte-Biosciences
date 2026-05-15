@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { VesselGrowth } from "../illustrations/VesselGrowth";
 import { Macrophages } from "../illustrations/Macrophages";
-import { Phagocytosis } from "../illustrations/Phagocytosis";
 import { ScrollCue } from "./ScrollCue";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -35,22 +34,13 @@ export function HeroSvg() {
       {/* === ILLUSTRATIONS — sit directly on the section so their corners
               reach the viewport edges (beyond the max-w-7xl content margins) === */}
 
-      {/* Macrophage cluster — top-left, full-bleed (particles travel diagonally) */}
+      {/* Macrophage cluster — top-right corner, particles drift downward */}
       <div
         key={`cluster-${animKey}`}
         className="pointer-events-none absolute inset-0 z-0 hidden md:block"
         aria-hidden="true"
       >
         <Macrophages className="h-full w-full" />
-      </div>
-
-      {/* Phagocytosis — bottom-left corner, separate small SVG */}
-      <div
-        key={`phago-${animKey}`}
-        className="pointer-events-none absolute bottom-0 left-0 z-0 hidden w-[28vw] max-w-[360px] aspect-[5/4] md:block"
-        aria-hidden="true"
-      >
-        <Phagocytosis className="h-full w-full" />
       </div>
 
       {/* Vessels — bottom-right, full-bleed (corner glow at viewport corner) */}
