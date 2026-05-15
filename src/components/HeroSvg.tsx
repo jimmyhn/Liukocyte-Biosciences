@@ -53,7 +53,7 @@ export function HeroSvg() {
           </motion.p>
 
           <h1 className="font-display font-semibold leading-[0.92] tracking-tightest text-[clamp(38px,7vw,96px)]">
-            {["Immune", "Innovation", "For Active", "Healing."].map((line, i) => (
+            {["Immune", "Innovation", "For Active", "Healing"].map((line, i) => (
               <motion.span
                 key={line}
                 variants={lineV}
@@ -65,7 +65,7 @@ export function HeroSvg() {
                     For <span className="text-grad">Active</span>
                   </span>
                 ) : (
-                  <span className={line === "Healing." ? "text-grad" : ""}>
+                  <span className={line === "Healing" ? "text-grad" : ""}>
                     {line}
                   </span>
                 )}

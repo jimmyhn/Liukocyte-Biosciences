@@ -48,7 +48,7 @@ export function Nav() {
   return (
     <>
       {/* Top bar: centered logo, no menu button */}
-      <header className="fixed inset-x-0 top-0 z-50 py-2">
+      <header className="fixed inset-x-0 top-0 z-50 pt-8 pb-2">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 transition-[opacity,backdrop-filter] duration-500 ease-out"
