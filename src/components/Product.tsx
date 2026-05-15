@@ -108,11 +108,9 @@ export function Product() {
         viewport={{ once: true, amount: 0.2 }}
         className="mt-24 rounded-3xl bg-white/[0.015] ring-1 ring-white/8 p-6 md:p-10"
       >
-        <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-400 mb-2">
-          In the wound bed
-        </p>
-        <h3 className="font-display text-2xl md:text-3xl font-semibold mb-6">
-          From inflammation to <span className="text-grad">vascularization</span>.
+        <h3 className="font-display text-2xl md:text-4xl font-semibold mb-8 text-center">
+          ANGel helps <span className="text-grad">support</span> the wound bed like a{" "}
+          <span className="text-grad">scaffold</span>.
         </h3>
         <SkinCrossSection className="w-full h-auto" />
       </motion.div>
