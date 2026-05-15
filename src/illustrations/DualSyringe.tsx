@@ -229,20 +229,20 @@ export function DualSyringe({ className = "" }: { className?: string }) {
 
       {/* ── LABELS ──────────────────────────────────────────────── */}
       <text
-        x={BL + BW / 2} y={TOP_Y - 8}
+        x={BL + BW / 2} y={TOP_Y - 20}
         textAnchor="middle"
-        fill="#7BC9E8" fontSize="9"
+        fill="#7BC9E8" fontSize="25"
         fontFamily="JetBrains Mono, monospace" letterSpacing="2"
       >
-        HYDROGEL BASE
+        PEG-NHS Reagent
       </text>
       <text
-        x={BL + BW / 2} y={TOP_Y + TOTAL_H + 20}
+        x={BL + BW / 1.8} y={TOP_Y + TOTAL_H + 45}
         textAnchor="middle"
-        fill="#F58A4B" fontSize="9"
+        fill="#F58A4B" fontSize="25"
         fontFamily="JetBrains Mono, monospace" letterSpacing="2"
       >
-        AN FACTOR
+        PLL + AN Factors Reagent
       </text>
 
       <style>{`

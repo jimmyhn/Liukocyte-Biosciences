@@ -47,16 +47,18 @@ export function Product() {
           variants={fadeUp}
           className="font-display text-[clamp(36px,5vw,72px)] leading-[1.02] tracking-tightest font-semibold"
         >
-          An engineered bioactive hydrogel
-          <br />
-          <span className="text-grad">for enhanced angiogenesis.</span>
+          ANGel <span className="text-grad">promotes</span> angiogenesis by working 
+          {" "}<span className="text-grad">with</span> your body's 
+          {" "}<span className="text-grad">own</span> immune system.
         </motion.h2>
         <motion.p
           variants={fadeUp}
-          className="mt-6 text-lg text-bone-300 max-w-2xl"
+          className="mt-6 text-lg text-bone-300 w-[135%] max-w-none"
         >
-          Healing factors from your own immune cells, delivered directly into
-          the wound bed — shifting the wound from inflammation to repair.
+          Macrophages are the equivalent of your body's custodian. They consume anything that they think is foreign, dead, or dangerous. When our hydrogel is applied to a wound, 
+          macrophages will "eat" this foriegn material, in which dead neutrophil factors are embedded in as well. When this happens, it promotes macrophages to send anti-inflammatory signals that 
+          will signal other macrophages and other immune cells who are already in an inflammatory state to become pro-angiogenic. Thus ANGel can accelerate the healing process for physcians 
+          and patients alike.
         </motion.p>
       </motion.div>
 
