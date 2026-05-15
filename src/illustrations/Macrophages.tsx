@@ -1,16 +1,16 @@
 import { useId } from "react";
 
 /**
- * Macrophage cluster in the top-right corner.
+ * Macrophage cluster in the top-left corner.
  *
  * Three cells arranged diagonally:
- *   A (small) — upper-left of diagonal, center ~(1570, 108)
- *   C (big, focal) — center of cluster, center ~(1700, 215)
- *   B (small) — lower-right of diagonal, center ~(1790, 305), partially bleeds past right edge
+ *   A (small) — upper-left, center ~(96, 56), nearly touches the corner
+ *   C (big, focal) — center of cluster, center ~(265, 200)
+ *   B (small) — lower-right of diagonal, center ~(390, 316)
  *
- * Particles drift downward from the cluster toward the vessel area (bottom-right).
- * preserveAspectRatio="xMaxYMin slice" anchors the right edge + top edge to the
- * viewport corner so the cluster always sits in the top-right.
+ * Particles drift diagonally to the bottom-right where the vessel layer lives.
+ * preserveAspectRatio="xMinYMin slice" anchors the left + top edges so the
+ * cluster always sits in the top-left corner.
  */
 export function Macrophages({ className = "" }: { className?: string }) {
   const u = useId().replace(/:/g, "");
@@ -19,42 +19,42 @@ export function Macrophages({ className = "" }: { className?: string }) {
   const gGlow    = `mc-glow-${u}`;
   const gBigGlow = `mc-bigglow-${u}`;
 
-  // Speckles for focal cell C — original coords shifted (+1411, -125) to center ~(1700, 215)
+  // Speckles for focal cell C — original coords shifted (-24, -140) to center ~(265, 200)
   const speckles: Array<[number, number, number, number]> = [
-    [1686, 125, 1.4, 0.45], [1706, 120, 1.8, 0.55], [1731, 130, 1.4, 0.40],
-    [1756, 135, 1.6, 0.50], [1681, 150, 1.6, 0.45], [1709, 155, 2.0, 0.55],
-    [1736, 165, 1.4, 0.40], [1761, 160, 1.8, 0.50], [1676, 180, 1.4, 0.40],
-    [1706, 185, 1.6, 0.45], [1736, 195, 2.0, 0.55], [1766, 190, 1.4, 0.40],
-    [1686, 210, 1.8, 0.50], [1716, 215, 1.4, 0.40], [1746, 225, 1.8, 0.50],
-    [1696, 240, 1.6, 0.45], [1726, 245, 1.4, 0.40], [1756, 240, 1.6, 0.45],
+    [251, 110, 1.4, 0.45], [271, 105, 1.8, 0.55], [296, 115, 1.4, 0.40],
+    [321, 120, 1.6, 0.50], [246, 135, 1.6, 0.45], [274, 140, 2.0, 0.55],
+    [301, 150, 1.4, 0.40], [326, 145, 1.8, 0.50], [241, 165, 1.4, 0.40],
+    [271, 170, 1.6, 0.45], [301, 180, 2.0, 0.55], [331, 175, 1.4, 0.40],
+    [251, 195, 1.8, 0.50], [281, 200, 1.4, 0.40], [311, 210, 1.8, 0.50],
+    [261, 225, 1.6, 0.45], [291, 230, 1.4, 0.40], [321, 225, 1.6, 0.45],
     // softer dark cluster
-    [1721, 180, 2.6, 0.28], [1741, 205, 2.4, 0.26], [1701, 215, 2.6, 0.28],
+    [286, 165, 2.6, 0.28], [306, 190, 2.4, 0.26], [266, 200, 2.6, 0.28],
   ];
 
-  // Particles start near cluster (top-right) and drift downward toward vessel area
+  // Particles start near cluster (top-left) and fan out broadly toward the bottom-right corner
   const particles = [
-    { cx: 1630, cy: 120, dx: -50,  dy: 780, dur: 9.2, delay: 0.0 },
-    { cx: 1680, cy: 140, dx: -30,  dy: 800, dur: 9.6, delay: 0.4 },
-    { cx: 1720, cy: 115, dx:  20,  dy: 790, dur: 8.8, delay: 0.8 },
-    { cx: 1760, cy: 140, dx:  30,  dy: 780, dur: 9.2, delay: 1.2 },
-    { cx: 1650, cy: 200, dx: -80,  dy: 730, dur: 9.5, delay: 1.6 },
-    { cx: 1700, cy: 215, dx: -30,  dy: 760, dur: 8.9, delay: 2.0 },
-    { cx: 1750, cy: 200, dx:  10,  dy: 780, dur: 9.3, delay: 2.4 },
-    { cx: 1660, cy: 290, dx: -60,  dy: 680, dur: 9.6, delay: 0.6 },
-    { cx: 1710, cy: 300, dx: -10,  dy: 670, dur: 9.0, delay: 1.0 },
-    { cx: 1770, cy: 280, dx:  20,  dy: 690, dur: 9.4, delay: 1.4 },
-    { cx: 1610, cy: 180, dx: -100, dy: 740, dur: 9.7, delay: 1.8 },
-    { cx: 1660, cy: 110, dx: -20,  dy: 800, dur: 9.0, delay: 2.2 },
-    { cx: 1790, cy: 260, dx:  10,  dy: 720, dur: 9.5, delay: 2.6 },
-    { cx: 1600, cy: 240, dx: -120, dy: 700, dur: 9.8, delay: 3.0 },
-    { cx: 1800, cy: 170, dx:   0,  dy: 780, dur: 9.3, delay: 0.2 },
-    { cx: 1640, cy: 340, dx: -40,  dy: 620, dur: 8.7, delay: 1.5 },
+    { cx: 100, cy:  80, dx: 1580, dy: 820, dur: 9.2, delay: 0.0 },
+    { cx: 150, cy: 100, dx: 1480, dy: 790, dur: 9.6, delay: 0.4 },
+    { cx: 200, cy:  85, dx: 1380, dy: 810, dur: 8.8, delay: 0.8 },
+    { cx: 250, cy: 110, dx: 1280, dy: 790, dur: 9.2, delay: 1.2 },
+    { cx: 120, cy: 160, dx: 1540, dy: 750, dur: 9.5, delay: 1.6 },
+    { cx: 170, cy: 175, dx: 1440, dy: 730, dur: 8.9, delay: 2.0 },
+    { cx: 230, cy: 170, dx: 1340, dy: 740, dur: 9.3, delay: 2.4 },
+    { cx: 150, cy: 240, dx: 1500, dy: 670, dur: 9.6, delay: 0.6 },
+    { cx: 200, cy: 250, dx: 1400, dy: 660, dur: 9.0, delay: 1.0 },
+    { cx: 260, cy: 230, dx: 1300, dy: 690, dur: 9.4, delay: 1.4 },
+    { cx:  80, cy: 190, dx: 1600, dy: 710, dur: 9.7, delay: 1.8 },
+    { cx: 140, cy:  75, dx: 1520, dy: 840, dur: 9.0, delay: 2.2 },
+    { cx: 320, cy: 300, dx: 1240, dy: 650, dur: 9.5, delay: 2.6 },
+    { cx:  60, cy: 140, dx: 1650, dy: 780, dur: 9.8, delay: 3.0 },
+    { cx: 350, cy: 170, dx: 1200, dy: 770, dur: 9.3, delay: 0.2 },
+    { cx: 110, cy: 310, dx: 1560, dy: 620, dur: 8.7, delay: 1.5 },
   ];
 
   return (
     <svg
       viewBox="0 0 1800 1000"
-      preserveAspectRatio="xMaxYMin slice"
+      preserveAspectRatio="xMinYMin slice"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
@@ -82,61 +82,60 @@ export function Macrophages({ className = "" }: { className?: string }) {
       </defs>
 
       {/* Blue atmospheric glow centered on the cluster */}
-      <ellipse cx="1700" cy="210" rx="420" ry="340" fill={`url(#${gBigGlow})`} />
+      <ellipse cx="220" cy="190" rx="380" ry="300" fill={`url(#${gBigGlow})`} />
 
-      {/* === CELL A — small, upper-left of diagonal, center ~(1566, 104) === */}
+      {/* === CELL A — small, upper-left of diagonal, nearly touches the corner === */}
       <g className="mc-cell mc-cell-1">
         <path
           fill={`url(#${gBody})`}
           stroke="#7BC9E8"
           strokeOpacity="0.22"
           strokeWidth="1.1"
-          d="M1551,59 C1581,57 1606,67 1616,89
-             C1626,107 1621,131 1606,143
-             C1586,159 1558,159 1541,147
-             C1521,134 1514,109 1524,89
-             C1531,74 1541,61 1551,59 Z"
+          d="M81,11 C111,9 136,19 146,41
+             C156,59 151,83 136,95
+             C116,111 88,111 71,99
+             C51,86 44,61 54,41
+             C61,26 71,13 81,11 Z"
         />
-        <ellipse cx="1566" cy="104" rx="14" ry="11" fill={`url(#${gNuc})`} />
+        <ellipse cx="96" cy="56" rx="14" ry="11" fill={`url(#${gNuc})`} />
       </g>
 
-      {/* === CELL B — small, lower-right of diagonal, center ~(1790, 301)
-              Intentionally extends past x=1800 so it bleeds into the right corner. === */}
+      {/* === CELL B — small, lower-right of diagonal, center ~(390, 316) === */}
       <g className="mc-cell mc-cell-2">
         <path
           fill={`url(#${gBody})`}
           stroke="#7BC9E8"
           strokeOpacity="0.22"
           strokeWidth="1.1"
-          d="M1775,256 C1805,254 1830,266 1838,288
-             C1848,311 1840,331 1822,342
-             C1800,356 1775,354 1758,340
-             C1742,326 1735,304 1745,286
-             C1750,271 1765,258 1775,256 Z"
+          d="M375,271 C405,269 430,281 438,303
+             C448,326 440,346 422,357
+             C400,371 375,369 358,355
+             C342,341 335,319 345,301
+             C350,286 365,273 375,271 Z"
         />
-        <ellipse cx="1790" cy="301" rx="14" ry="11" fill={`url(#${gNuc})`} />
+        <ellipse cx="390" cy="316" rx="14" ry="11" fill={`url(#${gNuc})`} />
       </g>
 
-      {/* === CELL C — big focal, center of diagonal, center ~(1700, 215) === */}
+      {/* === CELL C — big focal, center of diagonal, center ~(265, 200) === */}
       <g className="mc-cell mc-cell-3">
         <path
           fill={`url(#${gBody})`}
           stroke="#9CD9F0"
           strokeOpacity="0.32"
           strokeWidth="1.4"
-          d="M1706,100
-             C1746,95  1783,107 1799,135
-             C1813,153 1819,177 1807,197
-             C1821,213 1821,240 1801,253
-             C1807,273 1789,295 1765,297
-             C1766,317 1743,330 1719,323
-             C1703,335 1679,335 1665,323
-             C1639,330 1619,317 1619,295
-             C1599,293 1586,273 1595,253
-             C1581,240 1579,215 1595,200
-             C1586,180 1593,157 1611,147
-             C1625,125 1651,107 1681,103
-             C1689,100 1697,99  1706,100 Z"
+          d="M271,85
+             C311,80  348,92  364,120
+             C378,138 384,162 372,182
+             C386,198 386,225 366,238
+             C372,258 354,280 330,282
+             C331,302 308,315 284,308
+             C268,320 244,320 230,308
+             C204,315 184,302 184,280
+             C164,278 151,258 160,238
+             C146,225 144,200 160,185
+             C151,165 158,142 176,132
+             C190,110 216,92  246,88
+             C254,85  262,84  271,85 Z"
         />
 
         {/* Speckled cytoplasm */}
@@ -157,18 +156,18 @@ export function Macrophages({ className = "" }: { className?: string }) {
           stroke="#0c2d4a"
           strokeOpacity="0.25"
           strokeWidth="1"
-          d="M1696,175
-             C1676,175 1663,193 1663,213
-             C1663,233 1681,247 1706,247
-             C1724,247 1739,240 1747,223
-             C1757,228 1766,219 1766,205
-             C1768,188 1754,171 1737,167
-             C1725,165 1711,177 1703,188
-             C1701,180 1698,175 1696,175 Z"
+          d="M261,160
+             C241,160 228,178 228,198
+             C228,218 246,232 271,232
+             C289,232 304,225 312,208
+             C322,213 331,204 331,190
+             C333,173 319,156 302,152
+             C290,150 276,162 268,173
+             C266,165 263,160 261,160 Z"
         />
       </g>
 
-      {/* === PARTICLES — drift downward from cluster toward vessel area === */}
+      {/* === PARTICLES — drift diagonally to bottom-right (vessel area) === */}
       <g>
         {particles.map((p, i) => (
           <g

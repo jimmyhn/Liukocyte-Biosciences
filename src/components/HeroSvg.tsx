@@ -34,7 +34,7 @@ export function HeroSvg() {
       {/* === ILLUSTRATIONS — sit directly on the section so their corners
               reach the viewport edges (beyond the max-w-7xl content margins) === */}
 
-      {/* Macrophage cluster — top-right corner, particles drift downward */}
+      {/* Macrophage cluster — top-left corner, particles drift diagonally to bottom-right */}
       <div
         key={`cluster-${animKey}`}
         className="pointer-events-none absolute inset-0 z-0 hidden md:block"
