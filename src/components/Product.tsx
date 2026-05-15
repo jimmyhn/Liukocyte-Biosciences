@@ -12,13 +12,6 @@ const workflowSteps = [
   "Seal with film dressing",
 ];
 
-const indications = [
-  "Burns",
-  "Chronic Wounds",
-  "Skin Graft Prep",
-  "Full Thickness Wounds",
-];
-
 export function Product() {
   return (
     <Section id="product" num="02" label="Product">
@@ -113,31 +106,6 @@ export function Product() {
           <span className="text-grad">scaffold</span>.
         </h3>
         <SkinCrossSection className="w-full h-auto" />
-      </motion.div>
-
-      {/* Indication pills */}
-      <motion.div
-        variants={stagger(0.05, 0.06)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-        className="mt-20 flex flex-wrap justify-center gap-2.5"
-      >
-        <motion.span
-          variants={fadeUp}
-          className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-400 self-center mr-2"
-        >
-          For
-        </motion.span>
-        {indications.map((i) => (
-          <motion.span
-            key={i}
-            variants={fadeUp}
-            className="rounded-full px-4 py-2 text-sm ring-1 ring-white/15 hover:ring-angel-sky hover:text-angel-sky transition-colors"
-          >
-            {i}
-          </motion.span>
-        ))}
       </motion.div>
 
       <div className="mt-16 flex justify-center">
