@@ -8,6 +8,14 @@ type Member = {
   role: string;
   bio: string;
   photo: string;
+  /**
+   * Fine-tune how the photo sits inside the circular avatar.
+   *   x:    positive = move face RIGHT, negative = move face LEFT  (in %)
+   *   y:    positive = move face DOWN,  negative = move face UP    (in %)
+   *   zoom: 1 = no zoom; >1 zooms IN (face bigger); <1 zooms OUT (face smaller)
+   * Start with small values like 5 or -5 and increase from there.
+   */
+  adjust?: { x?: number; y?: number; zoom?: number };
 };
 
 const team: Member[] = [
@@ -16,32 +24,46 @@ const team: Member[] = [
     role: "Chief Executive Officer",
     bio: "Background in biomaterial research and academic communication; leads product demos, investor pitches, team coordination, and milestone execution.",
     photo: "/team-devin.png",
+    adjust: { x: 0, y: 0, zoom: 1 },
   },
   {
     name: "Catherine Salgado",
     role: "Chief Information Officer",
     bio: "Background in biomaterials and cell culture; supports experimental validation, biological integration, and product feasibility.",
     photo: "/team-catherine.png",
+    adjust: { x: 0, y: 0, zoom: 1 },
   },
   {
     name: "Kristin Hagen",
     role: "Chief Operations Officer",
     bio: "Extensive business experience; owns the company's business model and client interviews — driving clinical relevance and scalability.",
     photo: "/team-kristin.png",
+    adjust: { x: 0, y: 0, zoom: 1 },
   },
   {
     name: "Jimmy Nguyen",
     role: "Chief Financial Officer",
     bio: "Materials research and engineering design background; responsible for cost analysis, manufacturing feasibility, and financial stability.",
     photo: "/team-jimmy.png",
+    adjust: { x: 0, y: 0, zoom: 1 },
   },
   {
     name: "Ronald Nguyen",
     role: "Chief Technical Officer",
     bio: "Conducts biomaterial research and translates validated wet-lab findings into scalable, market-ready product design.",
     photo: "/team-ronald.png",
+    adjust: { x: 0, y: 0, zoom: 1 },
   },
 ];
+
+/** Mentor card — same adjust system as team members. */
+const mentor = {
+  name: "Wendy Liu, Ph.D.",
+  affiliation: "UCI Samueli School of Engineering · BioEngine",
+  email: "wendy.liu@uci.edu",
+  photo: "/liu.png",
+  adjust: { x: 0, y: 0, zoom: 1 },
+};
 
 export function Team() {
   return (
@@ -84,11 +106,16 @@ export function Team() {
             variants={fadeUp}
             className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-6 transition-transform hover:-translate-y-1"
           >
-            <img
-              src={m.photo}
-              alt={m.name}
-              className="w-40 h-40 rounded-full object-cover"
-            />
+            <div className="w-40 h-40 rounded-full overflow-hidden bg-white/[0.04]">
+              <img
+                src={m.photo}
+                alt={m.name}
+                className="w-full h-full object-cover"
+                style={{
+                  transform: `translate(${m.adjust?.x ?? 0}%, ${m.adjust?.y ?? 0}%) scale(${m.adjust?.zoom ?? 1})`,
+                }}
+              />
+            </div>
             <h3 className="mt-5 font-display text-base font-semibold">
               {m.name}
             </h3>
@@ -110,26 +137,29 @@ export function Team() {
         viewport={{ once: true, amount: 0.5 }}
         className="mt-12 rounded-2xl bg-white/[0.015] ring-1 ring-white/8 p-8 flex flex-wrap items-center gap-6"
       >
-        <img
-          src="/liu.png"
-          alt="Wendy Liu, Ph.D."
-          className="w-32 h-32 rounded-full object-cover object-top flex-shrink-0"
-        />
+        <div className="w-32 h-32 rounded-full overflow-hidden bg-white/[0.04] flex-shrink-0">
+          <img
+            src={mentor.photo}
+            alt={mentor.name}
+            className="w-full h-full object-cover"
+            style={{
+              transform: `translate(${mentor.adjust.x}%, ${mentor.adjust.y}%) scale(${mentor.adjust.zoom})`,
+            }}
+          />
+        </div>
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-400">
             Mentor
           </p>
           <p className="font-display text-2xl font-semibold mt-1">
-            Wendy Liu, Ph.D.
+            {mentor.name}
           </p>
-          <p className="text-sm text-bone-300 mt-1">
-            UCI Samueli School of Engineering · BioEngine
-          </p>
+          <p className="text-sm text-bone-300 mt-1">{mentor.affiliation}</p>
           <a
-            href="mailto:wendy.liu@uci.edu"
+            href={`mailto:${mentor.email}`}
             className="mt-2 inline-block text-sm text-angel-sky hover:text-angel-orange transition-colors"
           >
-            wendy.liu@uci.edu
+            {mentor.email}
           </a>
         </div>
       </motion.div>
