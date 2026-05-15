@@ -190,8 +190,8 @@ export function DualSyringe({ className = "" }: { className?: string }) {
 
       {/* ── MIXING CHAMBER ──────────────────────────────────────── */}
       <rect
-        x={BL + BW + 50} y={CY - 18}
-        width="40" height="36"
+        x={BL + BW + 5} y={CY - 18}
+        width="75" height="36"
         rx="4"
         fill={`url(#ds-mix-${u})`}
         opacity="0.80"
@@ -201,8 +201,8 @@ export function DualSyringe({ className = "" }: { className?: string }) {
       {/* ── NEEDLE / MIXING TIP ─────────────────────────────────── */}
       {/* Nozzle body — tapered tube (like reference helical static mixer) */}
       <rect
-        x={BL + BW + 90} y={CY - 11}
-        width="130" height="22"
+        x={BL + BW + 80} y={CY - 11}
+        width="140" height="22"
         rx="4"
         fill={`url(#ds-tip-${u})`}
         stroke="#8a909c" strokeWidth="1"
