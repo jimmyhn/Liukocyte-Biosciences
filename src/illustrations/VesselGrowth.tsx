@@ -44,18 +44,18 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
     "bottom-left":  "scale(1, -1) translate(0, -600)",
   }[origin];
 
-  // Waypoints redesigned for a wide HORIZONTAL fan spreading left across the
-  // screen — vessels expand primarily leftward with only moderate upward reach.
-  // High x in path coords = left on screen (after the bottom-right rotation).
-  const F1 = { x: 200, y: 100 };  // trunk-A first fork
-  const F2 = { x: 350, y: 120 };  // trunk-A second fork
-  const F3 = { x: 155, y: 200 };  // trunk-B fork
-  const F4 = { x: 310, y:  70 };  // trunk-C fork (very horizontal)
-  const F5 = { x:  95, y: 275 };  // trunk-D fork (modest height)
-  const T1 = { x: 490, y: 150 };  // trunk-A tip
-  const T2 = { x: 275, y: 295 };  // trunk-B tip
-  const T3 = { x: 525, y:  90 };  // trunk-C tip (very horizontal)
-  const T4 = { x: 170, y: 370 };  // trunk-D tip (moderate height only)
+  // Waypoints redesigned for maximum spread: wide horizontal fan reaching
+  // into the hero text area, plus clear vertical angle diversity so branches
+  // don't clump. High x = left on screen after the bottom-right rotation.
+  const F1 = { x: 185, y:  88 };  // trunk-A first fork
+  const F2 = { x: 345, y: 105 };  // trunk-A second fork
+  const F3 = { x: 135, y: 188 };  // trunk-B fork (angled upward)
+  const F4 = { x: 295, y:  58 };  // trunk-C fork (very horizontal)
+  const F5 = { x:  80, y: 268 };  // trunk-D fork (steeper upward)
+  const T1 = { x: 485, y: 128 };  // trunk-A tip — reaches into text area
+  const T2 = { x: 220, y: 308 };  // trunk-B tip
+  const T3 = { x: 540, y:  72 };  // trunk-C tip — very horizontal, deep in text area
+  const T4 = { x: 145, y: 382 };  // trunk-D tip — moderate height (below logo zone)
 
   return (
     <svg
@@ -89,104 +89,115 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         {/* Big orange glow at the origin corner */}
         <circle cx="40" cy="40" r="320" fill={`url(#${gFade})`} stroke="none" opacity="0.97" />
 
-        {/* === TRUNKS — 7 main arteries radiating from the corner in a wide
-              horizontal fan. High x in path coords = left on screen. === */}
+        {/* === TRUNKS — 7 arteries with wide angle diversity from the corner === */}
         <path className="vg-path vg-t1" strokeWidth="6.5"
-          d={`M40,40 C90,55 145,75 ${F1.x},${F1.y}`} />
+          d={`M40,40 C82,52 130,68 ${F1.x},${F1.y}`} />
         <path className="vg-path vg-t2" strokeWidth="5.8"
-          d={`M${F1.x},${F1.y} C260,108 305,115 ${F2.x},${F2.y}`} />
+          d={`M${F1.x},${F1.y} C248,95 298,100 ${F2.x},${F2.y}`} />
         <path className="vg-path vg-t3" strokeWidth="4.8"
-          d={`M${F2.x},${F2.y} C410,130 452,140 ${T1.x},${T1.y}`} />
+          d={`M${F2.x},${F2.y} C398,112 442,118 ${T1.x},${T1.y}`} />
         <path className="vg-path vg-t4" strokeWidth="5.4"
-          d={`M40,40 C65,100 105,148 ${F3.x},${F3.y}`} />
+          d={`M40,40 C58,95 92,140 ${F3.x},${F3.y}`} />
         <path className="vg-path vg-t5" strokeWidth="4.4"
-          d={`M${F3.x},${F3.y} C195,238 238,265 ${T2.x},${T2.y}`} />
+          d={`M${F3.x},${F3.y} C172,232 198,268 ${T2.x},${T2.y}`} />
         <path className="vg-path vg-t6" strokeWidth="5.6"
-          d={`M40,40 C120,48 215,55 ${F4.x},${F4.y} C385,72 455,80 ${T3.x},${T3.y}`} />
+          d={`M40,40 C110,44 195,50 ${F4.x},${F4.y} C382,62 458,66 ${T3.x},${T3.y}`} />
         <path className="vg-path vg-t7" strokeWidth="4.8"
-          d={`M40,40 C48,130 68,200 ${F5.x},${F5.y} C112,315 142,342 ${T4.x},${T4.y}`} />
+          d={`M40,40 C45,125 58,192 ${F5.x},${F5.y} C100,310 122,348 ${T4.x},${T4.y}`} />
 
-        {/* === BRANCHES — spread wide and low, only modest upward climb === */}
-        {/* From F1 */}
+        {/* === BRANCHES — each pair from a fork fans in clearly different
+              directions to avoid clumping. Some reach deep into the text area. === */}
+        {/* From F1 — one horizontal, one steep upward */}
         <path className="vg-path vg-b1" strokeWidth="3.4"
-          d={`M${F1.x},${F1.y} C225,72 255,62 285,55`} />
+          d={`M${F1.x},${F1.y} C222,68 252,55 282,48`} />
         <path className="vg-path vg-b2" strokeWidth="3.0"
-          d={`M${F1.x},${F1.y} C172,158 155,198 140,228`} />
+          d={`M${F1.x},${F1.y} C152,148 135,182 122,215`} />
 
-        {/* From F2 */}
+        {/* From F2 — one sweeping horizontal, one going upward at 45° */}
         <path className="vg-path vg-b3" strokeWidth="3.2"
-          d={`M${F2.x},${F2.y} C392,88 425,78 455,68`} />
+          d={`M${F2.x},${F2.y} C392,82 422,68 445,60`} />
         <path className="vg-path vg-b4" strokeWidth="2.8"
-          d={`M${F2.x},${F2.y} C345,188 338,220 330,252`} />
+          d={`M${F2.x},${F2.y} C335,175 330,208 325,242`} />
 
-        {/* From F3 */}
+        {/* From F3 — one nearly horizontal, one heading steeply upward */}
         <path className="vg-path vg-b5" strokeWidth="2.8"
-          d={`M${F3.x},${F3.y} C198,188 235,182 268,178`} />
+          d={`M${F3.x},${F3.y} C192,178 228,168 262,162`} />
         <path className="vg-path vg-b6" strokeWidth="2.6"
-          d={`M${F3.x},${F3.y} C132,248 110,278 90,310`} />
+          d={`M${F3.x},${F3.y} C112,238 92,268 78,298`} />
 
-        {/* From F4 */}
+        {/* From F4 — one very flat (far across bottom), one angling up */}
         <path className="vg-path vg-b7" strokeWidth="3.0"
-          d={`M${F4.x},${F4.y} C348,44 378,34 408,28`} />
+          d={`M${F4.x},${F4.y} C345,38 375,25 408,18`} />
         <path className="vg-path vg-b8" strokeWidth="2.6"
-          d={`M${F4.x},${F4.y} C295,118 272,158 252,188`} />
+          d={`M${F4.x},${F4.y} C275,112 255,148 242,182`} />
 
-        {/* From F5 */}
+        {/* From F5 — one continuing upward, one spreading horizontally */}
         <path className="vg-path vg-b9" strokeWidth="2.6"
-          d={`M${F5.x},${F5.y} C72,325 62,358 52,390`} />
+          d={`M${F5.x},${F5.y} C62,318 48,352 38,388`} />
         <path className="vg-path vg-b10" strokeWidth="2.4"
-          d={`M${F5.x},${F5.y} C155,262 195,252 232,242`} />
+          d={`M${F5.x},${F5.y} C148,255 188,242 228,235`} />
 
-        {/* From trunk tips */}
+        {/* From trunk tips — continuing horizontal AND heading upward */}
         <path className="vg-path vg-b11" strokeWidth="2.8"
-          d={`M${T1.x},${T1.y} C522,155 548,160 572,165`} />
+          d={`M${T1.x},${T1.y} C518,138 542,142 562,148`} />
         <path className="vg-path vg-b12" strokeWidth="2.6"
-          d={`M${T1.x},${T1.y} C482,198 476,228 472,258`} />
+          d={`M${T1.x},${T1.y} C475,188 468,218 462,252`} />
         <path className="vg-path vg-b13" strokeWidth="2.6"
-          d={`M${T2.x},${T2.y} C278,345 285,368 288,385`} />
+          d={`M${T2.x},${T2.y} C235,352 242,368 248,385`} />
         <path className="vg-path vg-b14" strokeWidth="2.4"
-          d={`M${T3.x},${T3.y} C552,98 572,108 588,115`} />
+          d={`M${T3.x},${T3.y} C558,95 572,105 582,112`} />
+        {/* b15: upward from T3 — sweeps into the text area at height */}
+        <path className="vg-path vg-b15" strokeWidth="2.4"
+          d={`M${T3.x},${T3.y} C542,138 545,165 548,198`} />
 
-        {/* === CAPILLARIES — fine tips fanning from branch ends === */}
-        {/* B1 tip ≈ (285, 55) */}
-        <path className="vg-path vg-c1"  strokeWidth="1.4" d="M285,55 C320,45 358,38 395,32" />
-        <path className="vg-path vg-c2"  strokeWidth="1.2" d="M285,55 C308,78 335,98 362,112" />
-        <path className="vg-path vg-c3"  strokeWidth="1.0" d="M285,55 C298,35 318,20 345,12" />
+        {/* === CAPILLARIES — wide-angle fans from each branch tip === */}
+        {/* B1 tip ≈ (282, 48) */}
+        <path className="vg-path vg-c1"  strokeWidth="1.4" d="M282,48 C322,35 362,24 402,15" />
+        <path className="vg-path vg-c2"  strokeWidth="1.2" d="M282,48 C308,72 332,92 358,110" />
+        <path className="vg-path vg-c3"  strokeWidth="1.0" d="M282,48 C302,28 328,14 358,6" />
 
-        {/* B2 tip ≈ (140, 228) */}
-        <path className="vg-path vg-c4"  strokeWidth="1.3" d="M140,228 C112,258 95,282 78,312" />
-        <path className="vg-path vg-c5"  strokeWidth="1.1" d="M140,228 C102,235 72,248 42,255" />
-        <path className="vg-path vg-c6"  strokeWidth="1.0" d="M140,228 C158,255 172,275 182,302" />
+        {/* B2 tip ≈ (122, 215) */}
+        <path className="vg-path vg-c4"  strokeWidth="1.3" d="M122,215 C92,248 75,272 58,305" />
+        <path className="vg-path vg-c5"  strokeWidth="1.1" d="M122,215 C85,222 55,232 28,240" />
+        <path className="vg-path vg-c6"  strokeWidth="1.0" d="M122,215 C138,248 150,272 158,305" />
 
-        {/* B3 tip ≈ (455, 68) */}
-        <path className="vg-path vg-c7"  strokeWidth="1.3" d="M455,68 C492,58 530,48 565,40" />
-        <path className="vg-path vg-c8"  strokeWidth="1.1" d="M455,68 C478,88 498,108 518,125" />
-        <path className="vg-path vg-c9"  strokeWidth="1.0" d="M455,68 C468,48 488,32 508,22" />
+        {/* B3 tip ≈ (445, 60) */}
+        <path className="vg-path vg-c7"  strokeWidth="1.3" d="M445,60 C482,48 520,36 558,26" />
+        <path className="vg-path vg-c8"  strokeWidth="1.1" d="M445,60 C468,82 490,102 512,120" />
+        <path className="vg-path vg-c9"  strokeWidth="1.0" d="M445,60 C462,38 484,20 508,10" />
 
-        {/* B4 tip ≈ (330, 252) */}
-        <path className="vg-path vg-c10" strokeWidth="1.3" d="M330,252 C335,288 335,315 332,345" />
-        <path className="vg-path vg-c11" strokeWidth="1.1" d="M330,252 C358,268 378,280 402,292" />
-        <path className="vg-path vg-c12" strokeWidth="1.0" d="M330,252 C302,268 280,282 258,295" />
+        {/* B4 tip ≈ (325, 242) */}
+        <path className="vg-path vg-c10" strokeWidth="1.3" d="M325,242 C330,282 328,312 322,345" />
+        <path className="vg-path vg-c11" strokeWidth="1.1" d="M325,242 C355,258 378,270 405,282" />
+        <path className="vg-path vg-c12" strokeWidth="1.0" d="M325,242 C298,258 275,272 250,285" />
 
-        {/* B6 tip ≈ (90, 310) */}
-        <path className="vg-path vg-c13" strokeWidth="1.2" d="M90,310 C68,342 55,368 42,398" />
-        <path className="vg-path vg-c14" strokeWidth="1.0" d="M90,310 C58,318 32,330 10,338" />
-        <path className="vg-path vg-c15" strokeWidth="1.0" d="M90,310 C108,338 120,360 130,388" />
+        {/* B6 tip ≈ (78, 298) */}
+        <path className="vg-path vg-c13" strokeWidth="1.2" d="M78,298 C52,332 38,358 24,392" />
+        <path className="vg-path vg-c14" strokeWidth="1.0" d="M78,298 C45,306 18,318 -4,325" />
+        <path className="vg-path vg-c15" strokeWidth="1.0" d="M78,298 C95,330 105,355 112,385" />
 
-        {/* B7 tip ≈ (408, 28) */}
-        <path className="vg-path vg-c16" strokeWidth="1.2" d="M408,28 C448,20 488,16 528,14" />
-        <path className="vg-path vg-c17" strokeWidth="1.0" d="M408,28 C435,48 458,62 478,78" />
+        {/* B7 tip ≈ (408, 18) */}
+        <path className="vg-path vg-c16" strokeWidth="1.2" d="M408,18 C448,10 490,6 532,4" />
+        <path className="vg-path vg-c17" strokeWidth="1.0" d="M408,18 C432,40 452,56 472,72" />
 
-        {/* B11 tip ≈ (572, 165) */}
-        <path className="vg-path vg-c18" strokeWidth="1.1" d="M572,165 C588,180 595,198 596,218" />
-        <path className="vg-path vg-c19" strokeWidth="1.0" d="M572,165 C584,145 590,128 594,110" />
+        {/* B11 tip ≈ (562, 148) — deep in text area */}
+        <path className="vg-path vg-c18" strokeWidth="1.1" d="M562,148 C580,158 592,172 596,192" />
+        <path className="vg-path vg-c19" strokeWidth="1.0" d="M562,148 C576,128 585,112 590,94" />
 
-        {/* B12 tip ≈ (472, 258) */}
-        <path className="vg-path vg-c20" strokeWidth="1.1" d="M472,258 C492,278 508,298 522,318" />
-        <path className="vg-path vg-c21" strokeWidth="1.0" d="M472,258 C458,282 448,302 435,325" />
+        {/* B12 tip ≈ (462, 252) */}
+        <path className="vg-path vg-c20" strokeWidth="1.1" d="M462,252 C482,275 498,295 512,318" />
+        <path className="vg-path vg-c21" strokeWidth="1.0" d="M462,252 C448,278 435,298 418,322" />
 
-        {/* B13 tip ≈ (288, 385) — kept well below logo zone (y < 398) */}
-        <path className="vg-path vg-c22" strokeWidth="1.0" d="M288,385 C295,392 298,396 300,400" />
+        {/* B13 tip ≈ (248, 385) — below logo zone */}
+        <path className="vg-path vg-c22" strokeWidth="1.0" d="M248,385 C252,393 255,397 258,400" />
+
+        {/* B14 tip ≈ (582, 112) — far into text area */}
+        <path className="vg-path vg-c23" strokeWidth="1.0" d="M582,112 C592,122 596,135 596,150" />
+        <path className="vg-path vg-c24" strokeWidth="1.0" d="M582,112 C588,92 592,75 594,58" />
+
+        {/* B15 tip ≈ (548, 198) — crosses text area at mid-height */}
+        <path className="vg-path vg-c25" strokeWidth="1.0" d="M548,198 C568,210 580,225 588,245" />
+        <path className="vg-path vg-c26" strokeWidth="1.0" d="M548,198 C558,175 562,155 565,135" />
       </g>
 
       <style>{`
@@ -222,6 +233,7 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         .vg-b12 { animation-delay: 8.0s; }
         .vg-b13 { animation-delay: 8.0s; }
         .vg-b14 { animation-delay: 8.1s; }
+        .vg-b15 { animation-delay: 8.2s; }
         /* Capillaries */
         .vg-c1  { animation-delay: 8.6s; }
         .vg-c2  { animation-delay: 8.7s; }
@@ -245,6 +257,10 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         .vg-c20 { animation-delay: 9.4s; }
         .vg-c21 { animation-delay: 9.5s; }
         .vg-c22 { animation-delay: 9.6s; }
+        .vg-c23 { animation-delay: 9.4s; }
+        .vg-c24 { animation-delay: 9.5s; }
+        .vg-c25 { animation-delay: 9.5s; }
+        .vg-c26 { animation-delay: 9.6s; }
         @keyframes vgDraw {
           0%   { stroke-dashoffset: 1000; opacity: 0;    }
           6%   {                          opacity: 1;    }
