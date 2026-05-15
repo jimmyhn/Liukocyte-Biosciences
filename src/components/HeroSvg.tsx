@@ -29,12 +29,7 @@ export function HeroSvg() {
       id="hero"
       className="relative min-h-[100svh] overflow-hidden"
     >
-      {/* Directional dark overlay — strong on the left for text legibility,
-          fades out right so the vessel glow stays vivid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/80 via-black/45 to-transparent"
-      />
+
 
       {/* Text content */}
       <div className="relative z-10 mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
