@@ -45,9 +45,9 @@ function GrowthBarsIcon({ className = "" }: { className?: string }) {
       {/* Baseline */}
       <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
       {/* Three orange bars, ascending */}
-      <rect x="30"  y="70" width="22" height="30" fill="#F58A4B" />
-      <rect x="68"  y="50" width="22" height="50" fill="#F58A4B" />
-      <rect x="106" y="28" width="22" height="72" fill="#F58A4B" />
+      <rect x="30"  y="70" width="22" height="30" fill="#5BB0DA" />
+      <rect x="68"  y="50" width="22" height="50" fill="#5BB0DA" />
+      <rect x="106" y="28" width="22" height="72" fill="#5BB0DA" />
       {/* Upward arrow trending across the bars */}
       <path
         d="M20,88 L60,68 L80,80 L100,52 L120,62 L160,22"
@@ -72,7 +72,7 @@ function GrowthBarsIcon({ className = "" }: { className?: string }) {
         y="86"
         fontSize="32"
         fontWeight="700"
-        fill="#F58A4B"
+        fill="#5BB0DA"
         fontFamily="ui-sans-serif, system-ui, sans-serif"
       >
         $
