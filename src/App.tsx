@@ -25,8 +25,10 @@ export default function App() {
         <div className="absolute inset-0 hidden md:block">
           <Macrophages className="h-full w-full" />
         </div>
-        {/* Vessel growth — bottom-right corner */}
-        <div className="absolute bottom-0 right-0 h-full w-full max-w-[1100px] hidden md:block">
+        {/* Vessel growth — full viewport so branches can reach the bottom-left
+            corner, top-right corner, and approach the macrophage cluster at
+            top-left. The SVG is still anchored to the bottom-right corner. */}
+        <div className="absolute inset-0 hidden md:block">
           <VesselGrowth origin="bottom-right" className="h-full w-full" />
         </div>
       </div>
