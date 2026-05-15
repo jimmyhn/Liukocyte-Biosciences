@@ -55,9 +55,9 @@ export function Team() {
           variants={fadeUp}
           className="font-display text-[clamp(36px,5vw,72px)] leading-[1.02] tracking-tightest font-semibold"
         >
-          Built at UCI.
+          Meet the <span className="text-grad">Team</span>.
           <br />
-          <span className="text-grad">Built to commercialize.</span>
+          Contact and <span className="text-grad">Connect</span> with us!
         </motion.h2>
         <motion.p
           variants={fadeUp}
