@@ -25,9 +25,9 @@ export function Needs() {
           variants={fadeUp}
           className="font-display text-[clamp(36px,5vw,72px)] leading-[1.02] tracking-tightest font-semibold"
         >
-          Wounds stuck in inflammation
+          <span className="text-grad">Delayed</span> tissue regeneration causes
           <br />
-          <span className="text-grad">can't heal themselves.</span>
+          <span className="text-grad">high</span> failure chance for <span className="text-grad">skin grafts</span>
         </motion.h2>
         <motion.p
           variants={fadeUp}
