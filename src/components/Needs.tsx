@@ -7,7 +7,6 @@ import { ScrollCue } from "./ScrollCue";
 
 /** Icon: 4 person silhouettes — first one accented (orange), rest muted. */
 function FourPeopleIcon({ className = "" }: { className?: string }) {
-  // Single person silhouette path (head + body)
   const person = (
     <g>
       <circle cx="20" cy="14" r="9" />
@@ -42,13 +41,10 @@ function GrowthBarsIcon({ className = "" }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      {/* Baseline */}
       <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      {/* Three orange bars, ascending */}
       <rect x="30"  y="70" width="22" height="30" fill="#5BB0DA" />
       <rect x="68"  y="50" width="22" height="50" fill="#5BB0DA" />
       <rect x="106" y="28" width="22" height="72" fill="#5BB0DA" />
-      {/* Upward arrow trending across the bars */}
       <path
         d="M20,88 L60,68 L80,80 L100,52 L120,62 L160,22"
         fill="none"
@@ -57,7 +53,6 @@ function GrowthBarsIcon({ className = "" }: { className?: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* Arrowhead */}
       <path
         d="M148,18 L162,18 L162,32"
         fill="none"
@@ -66,7 +61,6 @@ function GrowthBarsIcon({ className = "" }: { className?: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* Dollar sign — top-left, signifying rising cost */}
       <text
         x="158"
         y="86"
@@ -89,11 +83,11 @@ export function Needs() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="max-w-4xl"
+        className="max-w-5xl" 
       >
         <motion.h2
           variants={fadeUp}
-          className="font-display text-[clamp(36px,5vw,72px)] leading-[1.02] tracking-tightest font-semibold"
+          className="font-display text-[clamp(42px,6vw,84px)] leading-[1.02] tracking-tightest font-semibold"
         >
           <span className="text-grad">Delayed</span> tissue regeneration causes
           <br />
@@ -101,63 +95,64 @@ export function Needs() {
         </motion.h2>
       </motion.div>
 
-      {/* Stats — spacing between heading and stats controlled by mt-14 below */}
       <motion.div
         variants={stagger(0.05, 0.12)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-16" 
       >
-        {/* LEFT — 160,000 Skin Grafts (text-only) */}
+        {/* LEFT — 160,000 Skin Grafts */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col"
+          className="flex flex-col items-center text-center group"
         >
-          <div className="font-display text-5xl md:text-6xl font-semibold text-angel-orange leading-none">
-            160,000
+          <div className="h-[180px] flex items-center justify-center">
+            <div className="font-display text-8xl md:text-9xl font-semibold text-angel-orange leading-none tracking-tighter">
+              160k
+            </div>
           </div>
-          <div className="mt-3 font-display text-2xl md:text-3xl font-semibold text-bone-100">
+          <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-grad-cool">
             Skin Grafts
           </div>
-          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
-            Performed annually in the US treating burns, chronic wounds,
-            traumatic injuries, and post-surgical defects.
+          <p className="mt-5 text-base md:text-lg text-bone-300 leading-relaxed max-w-[320px]">
+            Performed annually in the US treating burns and chronic wounds.
           </p>
         </motion.div>
 
-        {/* MIDDLE — 1 in 4 with 4-people graphic */}
+        {/* MIDDLE — 1 in 4 Fail */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center"
+          className="flex flex-col items-center text-center group"
         >
-          <FourPeopleIcon className="w-full max-w-[220px] h-auto" />
-          <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
-            1 in 4
+          <div className="h-[180px] flex items-center justify-center">
+            <FourPeopleIcon className="w-full max-w-[300px] h-auto" />
           </div>
-          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
-            Skin graft procedures fail on average — leaving wounds open to
-            chronic complications.
+          <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-angel-orange leading-none">
+            1 in 4 Fail
+          </div>
+          <p className="mt-5 text-base md:text-lg text-bone-300 leading-relaxed max-w-[320px]">
+            Procedures fail on average—leaving wounds open to chronic complications.
           </p>
         </motion.div>
 
-        {/* RIGHT — $32 Billion with growth bars */}
+        {/* RIGHT — $32 Billion Burden */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center text-bone-100"
+          className="flex flex-col items-center text-center group"
         >
-          <GrowthBarsIcon className="w-full max-w-[220px] h-auto" />
-          <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
-            $32 Billion
+          <div className="h-[180px] flex items-center justify-center">
+            <GrowthBarsIcon className="w-full max-w-[280px] h-auto" />
           </div>
-          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
-            Annual economic burden in the US from chronic wounds and failed
-            graft procedures.
+          <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-angel-orange leading-none">
+            $32B Burden
+          </div>
+          <p className="mt-5 text-base md:text-lg text-bone-300 leading-relaxed max-w-[320px]">
+            Annual economic burden in the US from failed graft procedures.
           </p>
         </motion.div>
       </motion.div>
 
-      {/* Healing phase pipeline */}
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -170,18 +165,16 @@ export function Needs() {
             Angiogenesis &amp; Why It&apos;s{" "}
             <span className="text-angel-orange">Delayed</span>
           </h3>
-          <p className="mt-3 text-base text-bone-300 max-w-2xl">
-            Wound healing follows four sequential phases. When macrophages fail to
-            shift from the inflammatory M1 state to the regenerative M2 state,
-            the process stalls — new blood vessels never form, and the graft
-            has no foundation to take hold.
+          <p className="mt-3 text-base text-bone-300 max-w-5x1">
+            Angiogenesis is the process of new blood vessel formation, promoted by anti-inflammatory M2 macrophage signaling.
+            Chronic inflammation prevents pro-inflammatory M1 macrophages to effectively differentiate into their pro-regenerative M2 state.
+            When angiogenesis is prolonged, the risk of infection increases and likelihood of healing is decreases.
           </p>
         </div>
         <HealingPhases />
       </motion.div>
 
-      {/* Existing solutions fall short */}
-      <div className="mt-20">
+      <div className="mt-32">
         <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
           <h3 className="font-display text-2xl md:text-3xl font-semibold">
             Existing products <span className="text-grad">fall short.</span>
@@ -193,7 +186,7 @@ export function Needs() {
         <ExistingFallShort />
       </div>
 
-      <div className="mt-16 flex justify-center">
+      <div className="mt-24 flex justify-center">
         <ScrollCue label="Product" href="#product" />
       </div>
     </Section>
