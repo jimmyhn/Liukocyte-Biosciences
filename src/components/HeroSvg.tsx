@@ -53,18 +53,24 @@ export function HeroSvg() {
           </motion.p>
 
           <h1 className="font-display font-semibold leading-[0.92] tracking-tightest text-[clamp(38px,7vw,96px)]">
-            {["Immune", "Innovation", "for Active", "Healing."].map(
-              (line, i) => (
-                <motion.span
-                  key={line}
-                  variants={lineV}
-                  transition={{ duration: 0.7, ease, delay: 0.6 + i * 0.35 }}
-                  className={`block ${line === "Innovation" ? "text-grad" : ""}`}
-                >
-                  {line}
-                </motion.span>
-              ),
-            )}
+            {["Immune", "Innovation", "For Active", "Healing."].map((line, i) => (
+              <motion.span
+                key={line}
+                variants={lineV}
+                transition={{ duration: 0.7, ease, delay: 0.6 + i * 0.35 }}
+                className="block w-fit"
+              >
+                {line === "For Active" ? (
+                  <span>
+                    For <span className="text-grad">Active</span>
+                  </span>
+                ) : (
+                  <span className={line === "Healing." ? "text-grad" : ""}>
+                    {line}
+                  </span>
+                )}
+              </motion.span>
+            ))}
           </h1>
 
           <motion.p
@@ -72,8 +78,8 @@ export function HeroSvg() {
             transition={{ duration: 0.6, ease, delay: 2.3 }}
             className="mt-8 max-w-xl text-base md:text-lg text-bone-300 leading-relaxed"
           >
-            ANGel is an engineered bioactive hydrogel that uses your body's own
-            healing intelligence to rebuild wounds — not just cover them.
+            ANGel is an engineered immune-activating hydrogel that
+            accelerates healing by promoting rapid blood vessel regrowth.
           </motion.p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
