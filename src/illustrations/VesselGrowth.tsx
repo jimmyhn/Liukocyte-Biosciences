@@ -140,8 +140,10 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
           d={`M${T1.x},${T1.y} C490,260 530,250 570,240`} />
         <path className="vg-path vg-b12" strokeWidth="2.6"
           d={`M${T1.x},${T1.y} C450,330 460,370 460,410`} />
+        {/* vg-b13 rerouted: pulls back from path coords (~355-431, ~398-475)
+            which corresponds to the centered logo on screen */}
         <path className="vg-path vg-b13" strokeWidth="2.6"
-          d={`M${T2.x},${T2.y} C360,420 390,450 400,490`} />
+          d={`M${T2.x},${T2.y} C310,420 295,460 290,510`} />
         <path className="vg-path vg-b14" strokeWidth="2.4"
           d={`M${T3.x},${T3.y} C560,210 580,240 590,280`} />
 
@@ -161,9 +163,9 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         <path className="vg-path vg-c8"  strokeWidth="1.1" d="M480,140 C510,160 530,180 555,200" />
         <path className="vg-path vg-c9"  strokeWidth="1.0" d="M480,140 C490,110 510,90 530,70" />
 
-        {/* B4 tip ≈ (280, 370) */}
+        {/* B4 tip ≈ (280, 370) — c11 rerouted to stay outside the logo zone */}
         <path className="vg-path vg-c10" strokeWidth="1.3" d="M280,370 C290,410 290,440 290,480" />
-        <path className="vg-path vg-c11" strokeWidth="1.1" d="M280,370 C310,400 330,420 350,450" />
+        <path className="vg-path vg-c11" strokeWidth="1.1" d="M280,370 C290,400 295,420 300,460" />
         <path className="vg-path vg-c12" strokeWidth="1.0" d="M280,370 C250,400 230,420 210,450" />
 
         {/* B6 tip ≈ (130, 430) */}
@@ -179,9 +181,9 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         <path className="vg-path vg-c18" strokeWidth="1.1" d="M570,240 C590,260 595,290 595,320" />
         <path className="vg-path vg-c19" strokeWidth="1.0" d="M570,240 C585,210 590,200 595,180" />
 
-        {/* B12 tip ≈ (460, 410) */}
+        {/* B12 tip ≈ (460, 410) — c21 rerouted (was passing through logo) */}
         <path className="vg-path vg-c20" strokeWidth="1.1" d="M460,410 C490,440 510,470 530,500" />
-        <path className="vg-path vg-c21" strokeWidth="1.0" d="M460,410 C440,450 430,480 420,520" />
+        <path className="vg-path vg-c21" strokeWidth="1.0" d="M460,410 C470,450 475,480 480,510" />
 
         {/* B13 tip ≈ (400, 490) — pulled back so it doesn't cross the logo at hero top-center */}
         <path className="vg-path vg-c22" strokeWidth="1.0" d="M400,490 C415,505 425,515 432,525" />
