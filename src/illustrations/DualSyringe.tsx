@@ -1,13 +1,27 @@
 import { useId } from "react";
 
 /**
- * Dual-barrel syringe illustration.
- * Two side-by-side barrels — top (cyan/blue) = hydrogel base,
- * bottom (orange) = AN factor. Converge into a mixing chamber and needle.
+ * Dual-barrel syringe illustration — reference-matched.
+ *
+ * Two barrels sit flush side-by-side (touching, no gap).
+ * A single unified thumb-pad plunger spans both barrels.
+ * A single finger-flange plate spans both barrels at the back.
+ * Both barrels taper together into one shared mixing-tip nozzle.
  * An animated droplet stream exits the tip.
  */
 export function DualSyringe({ className = "" }: { className?: string }) {
   const u = useId().replace(/:/g, "");
+
+  // Barrel geometry
+  const BL = 155;   // barrel left edge x
+  const BW = 290;   // barrel width
+  const BH = 72;    // single barrel height
+  const GAP = 0;    // gap between barrels (0 = flush together)
+  const TOP_Y = 90; // top barrel top edge y
+  const BOT_Y = TOP_Y + BH + GAP; // bottom barrel top edge y (= 162)
+  const TOTAL_H = BH * 2 + GAP;   // total stacked height = 144
+  const CY = TOP_Y + TOTAL_H / 2; // vertical center = 162
+
   return (
     <svg
       viewBox="0 0 720 360"
@@ -16,78 +30,218 @@ export function DualSyringe({ className = "" }: { className?: string }) {
       aria-label="Dual-barrel syringe"
     >
       <defs>
+        {/* Barrel fills */}
         <linearGradient id={`ds-top-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"  stopColor="#7BC9E8" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#3FA3D1" stopOpacity="0.85" />
+          <stop offset="0%"   stopColor="#9DD9F0" stopOpacity="0.25" />
+          <stop offset="50%"  stopColor="#5BB8DF" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#3A9DC4" stopOpacity="0.80" />
         </linearGradient>
         <linearGradient id={`ds-bot-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"  stopColor="#F58A4B" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="#d56a2a" stopOpacity="0.9" />
+          <stop offset="0%"   stopColor="#F9A06A" stopOpacity="0.30" />
+          <stop offset="50%"  stopColor="#F07535" stopOpacity="0.60" />
+          <stop offset="100%" stopColor="#C85820" stopOpacity="0.85" />
         </linearGradient>
-        <linearGradient id={`ds-mix-${u}`} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"  stopColor="#F58A4B" />
+        {/* Shared outer shell (light grey-white plastic like reference) */}
+        <linearGradient id={`ds-shell-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#d8dde6" />
+          <stop offset="40%"  stopColor="#f0f2f5" />
+          <stop offset="100%" stopColor="#b8bfc9" />
+        </linearGradient>
+        {/* Metal / dark plastic for plunger rod */}
+        <linearGradient id={`ds-metal-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#4a5160" />
+          <stop offset="50%"  stopColor="#7a8396" />
+          <stop offset="100%" stopColor="#30363f" />
+        </linearGradient>
+        {/* Mixing-tip gradient */}
+        <linearGradient id={`ds-mix-${u}`} x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%"   stopColor="#F07535" />
           <stop offset="100%" stopColor="#3FA3D1" />
         </linearGradient>
-        <linearGradient id={`ds-metal-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"  stopColor="#3a4150" />
-          <stop offset="50%" stopColor="#6b7585" />
-          <stop offset="100%" stopColor="#2a313d" />
+        {/* Tip / nozzle body */}
+        <linearGradient id={`ds-tip-${u}`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#c8cdd6" />
+          <stop offset="50%"  stopColor="#e8eaed" />
+          <stop offset="100%" stopColor="#9aa0ab" />
         </linearGradient>
       </defs>
 
-      {/* Plungers */}
-      <rect x="20"  y="80"  width="22" height="80" rx="3" fill={`url(#ds-metal-${u})`} />
-      <rect x="20"  y="200" width="22" height="80" rx="3" fill={`url(#ds-metal-${u})`} />
-      <rect x="0"   y="85"  width="22" height="20"        fill={`url(#ds-metal-${u})`} />
-      <rect x="0"   y="255" width="22" height="20"        fill={`url(#ds-metal-${u})`} />
+      {/* ── PLUNGER ASSEMBLY ─────────────────────────────────────── */}
+      {/* Single unified thumb-pad — wide flat rectangle spanning both barrels */}
+      <rect
+        x="8" y={TOP_Y - 16}
+        width="38" height={TOTAL_H + 32}
+        rx="5"
+        fill={`url(#ds-shell-${u})`}
+        stroke="#9aa0ab" strokeWidth="1"
+      />
+      {/* Thumb-pad rim highlight */}
+      <rect
+        x="8" y={TOP_Y - 16}
+        width="6" height={TOTAL_H + 32}
+        rx="3"
+        fill="white" fillOpacity="0.35"
+      />
 
-      {/* Plunger shafts */}
-      <rect x="42"  y="110" width="98" height="20" fill="#52596a" />
-      <rect x="42"  y="230" width="98" height="20" fill="#52596a" />
+      {/* Two plunger rods — run from thumb pad to inside each barrel */}
+      <rect x="46"  y={TOP_Y + 25}  width="110" height="18" rx="3" fill={`url(#ds-metal-${u})`} />
+      <rect x="46"  y={BOT_Y + 25}  width="110" height="18" rx="3" fill={`url(#ds-metal-${u})`} />
 
-      {/* Finger flanges */}
-      <rect x="140" y="60"  width="14" height="80"  rx="3" fill="#52596a" />
-      <rect x="140" y="220" width="14" height="80"  rx="3" fill="#52596a" />
+      {/* ── FINGER FLANGE — single plate spanning both barrels ────── */}
+      <rect
+        x={BL - 14} y={TOP_Y - 18}
+        width="18" height={TOTAL_H + 36}
+        rx="4"
+        fill={`url(#ds-shell-${u})`}
+        stroke="#9aa0ab" strokeWidth="1"
+      />
+      {/* Flange highlight */}
+      <rect
+        x={BL - 14} y={TOP_Y - 18}
+        width="5" height={TOTAL_H + 36}
+        rx="3"
+        fill="white" fillOpacity="0.30"
+      />
 
-      {/* Top barrel — hydrogel base (blue) */}
-      <rect x="154" y="80"  width="290" height="80" rx="6" fill={`url(#ds-top-${u})`} stroke="#7BC9E8" strokeOpacity="0.6" strokeWidth="1.2" />
-      <g stroke="#0a0d16" strokeOpacity="0.4" strokeWidth="1">
+      {/* ── BARRELS ─────────────────────────────────────────────── */}
+      {/* Shared outer shell — one solid rect encompassing both barrels */}
+      <rect
+        x={BL} y={TOP_Y}
+        width={BW} height={TOTAL_H}
+        rx="8"
+        fill={`url(#ds-shell-${u})`}
+        stroke="#9aa0ab" strokeWidth="1.5"
+      />
+
+      {/* Divider line between the two barrels */}
+      <line
+        x1={BL + 6} y1={CY}
+        x2={BL + BW - 6} y2={CY}
+        stroke="#8a909c" strokeWidth="1.2" strokeOpacity="0.7"
+      />
+
+      {/* Top barrel fill (blue tint) */}
+      <rect
+        x={BL + 3} y={TOP_Y + 3}
+        width={BW - 6} height={BH - 4}
+        rx="5"
+        fill={`url(#ds-top-${u})`}
+      />
+      {/* Bottom barrel fill (orange tint) */}
+      <rect
+        x={BL + 3} y={BOT_Y + 1}
+        width={BW - 6} height={BH - 4}
+        rx="5"
+        fill={`url(#ds-bot-${u})`}
+      />
+
+      {/* Barrel tick marks — top */}
+      <g stroke="#0a0d16" strokeOpacity="0.25" strokeWidth="1">
         {[0,1,2,3,4,5,6,7].map(i => (
-          <line key={i} x1={186 + i*32} y1="80" x2={186 + i*32} y2="95" />
+          <line key={i}
+            x1={BL + 28 + i * 30} y1={TOP_Y + 4}
+            x2={BL + 28 + i * 30} y2={TOP_Y + 16}
+          />
+        ))}
+      </g>
+      {/* Barrel tick marks — bottom */}
+      <g stroke="#0a0d16" strokeOpacity="0.25" strokeWidth="1">
+        {[0,1,2,3,4,5,6,7].map(i => (
+          <line key={i}
+            x1={BL + 28 + i * 30} y1={BOT_Y + 4}
+            x2={BL + 28 + i * 30} y2={BOT_Y + 16}
+          />
         ))}
       </g>
 
-      {/* Bottom barrel — AN factor (orange) */}
-      <rect x="154" y="200" width="290" height="80" rx="6" fill={`url(#ds-bot-${u})`} stroke="#F58A4B" strokeOpacity="0.6" strokeWidth="1.2" />
-      <g stroke="#0a0d16" strokeOpacity="0.4" strokeWidth="1">
-        {[0,1,2,3,4,5,6,7].map(i => (
-          <line key={i} x1={186 + i*32} y1="200" x2={186 + i*32} y2="215" />
-        ))}
-      </g>
+      {/* Barrel highlight (top specular strip) */}
+      <rect
+        x={BL + 3} y={TOP_Y + 3}
+        width={BW - 6} height="10"
+        rx="4"
+        fill="white" fillOpacity="0.18"
+      />
+      <rect
+        x={BL + 3} y={BOT_Y + 3}
+        width={BW - 6} height="10"
+        rx="4"
+        fill="white" fillOpacity="0.12"
+      />
 
-      {/* Convergence triangles */}
-      <path d="M444,80 L490,150 L444,160 Z"   fill={`url(#ds-top-${u})`} stroke="#7BC9E8" strokeOpacity="0.6" strokeWidth="1.2" />
-      <path d="M444,200 L490,210 L444,280 Z"  fill={`url(#ds-bot-${u})`} stroke="#F58A4B" strokeOpacity="0.6" strokeWidth="1.2" />
+      {/* ── CONVERGENCE CONE — both barrels taper into one tip ─── */}
+      {/* Top half of cone */}
+      <path
+        d={`M${BL + BW},${TOP_Y} L${BL + BW + 52},${CY - 10} L${BL + BW},${CY}`}
+        fill={`url(#ds-top-${u})`}
+        stroke="#9aa0ab" strokeWidth="1"
+      />
+      {/* Bottom half of cone */}
+      <path
+        d={`M${BL + BW},${CY} L${BL + BW + 52},${CY + 10} L${BL + BW},${TOP_Y + TOTAL_H}`}
+        fill={`url(#ds-bot-${u})`}
+        stroke="#9aa0ab" strokeWidth="1"
+      />
+      {/* Cone outer shell overlay */}
+      <path
+        d={`M${BL + BW},${TOP_Y + 4} L${BL + BW + 50},${CY - 10} L${BL + BW + 50},${CY + 10} L${BL + BW},${TOP_Y + TOTAL_H - 4}`}
+        fill="none"
+        stroke="#9aa0ab" strokeWidth="1.5"
+      />
 
-      {/* Mixing chamber */}
-      <rect x="490" y="150" width="60" height="60" rx="4" fill={`url(#ds-mix-${u})`} opacity="0.85" />
+      {/* ── MIXING CHAMBER ──────────────────────────────────────── */}
+      <rect
+        x={BL + BW + 50} y={CY - 18}
+        width="40" height="36"
+        rx="4"
+        fill={`url(#ds-mix-${u})`}
+        opacity="0.80"
+        stroke="#9aa0ab" strokeWidth="1"
+      />
 
-      {/* Needle */}
-      <rect x="550" y="172" width="120" height="16" fill={`url(#ds-metal-${u})`} />
-      <polygon points="670,172 700,180 670,188" fill="#9aa3b2" />
+      {/* ── NEEDLE / MIXING TIP ─────────────────────────────────── */}
+      {/* Nozzle body — tapered tube (like reference helical static mixer) */}
+      <rect
+        x={BL + BW + 90} y={CY - 11}
+        width="130" height="22"
+        rx="4"
+        fill={`url(#ds-tip-${u})`}
+        stroke="#8a909c" strokeWidth="1"
+      />
+      {/* Subtle helical line to suggest static mixer inside */}
+      <path
+        d={`M${BL + BW + 96},${CY - 5} Q${BL + BW + 112},${CY + 5} ${BL + BW + 128},${CY - 5}
+           Q${BL + BW + 144},${CY + 5} ${BL + BW + 160},${CY - 5}
+           Q${BL + BW + 176},${CY + 5} ${BL + BW + 192},${CY - 5}`}
+        fill="none" stroke="#8a909c" strokeWidth="0.8" strokeOpacity="0.5"
+      />
+      {/* Tip point */}
+      <polygon
+        points={`${BL + BW + 220},${CY - 11} ${BL + BW + 242},${CY} ${BL + BW + 220},${CY + 11}`}
+        fill="#a8aeb8"
+      />
 
-      {/* Droplet stream */}
+      {/* ── DROPLET STREAM ──────────────────────────────────────── */}
       <g>
-        <circle className="ds-drop ds-d1" cx="700" cy="180" r="4" fill={`url(#ds-mix-${u})`} />
-        <circle className="ds-drop ds-d2" cx="700" cy="180" r="3.5" fill={`url(#ds-mix-${u})`} />
-        <circle className="ds-drop ds-d3" cx="700" cy="180" r="3" fill={`url(#ds-mix-${u})`} />
+        <circle className="ds-drop ds-d1" cx={BL + BW + 244} cy={CY} r="4"   fill={`url(#ds-mix-${u})`} />
+        <circle className="ds-drop ds-d2" cx={BL + BW + 244} cy={CY} r="3.5" fill={`url(#ds-mix-${u})`} />
+        <circle className="ds-drop ds-d3" cx={BL + BW + 244} cy={CY} r="3"   fill={`url(#ds-mix-${u})`} />
       </g>
 
-      {/* Labels */}
-      <text x="299" y="60" textAnchor="middle" fill="#7BC9E8" fontSize="10" fontFamily="JetBrains Mono, monospace" letterSpacing="2">
-        HYDROGEL
+      {/* ── LABELS ──────────────────────────────────────────────── */}
+      <text
+        x={BL + BW / 2} y={TOP_Y - 8}
+        textAnchor="middle"
+        fill="#7BC9E8" fontSize="9"
+        fontFamily="JetBrains Mono, monospace" letterSpacing="2"
+      >
+        HYDROGEL BASE
       </text>
-      <text x="299" y="320" textAnchor="middle" fill="#F58A4B" fontSize="10" fontFamily="JetBrains Mono, monospace" letterSpacing="2">
+      <text
+        x={BL + BW / 2} y={TOP_Y + TOTAL_H + 20}
+        textAnchor="middle"
+        fill="#F58A4B" fontSize="9"
+        fontFamily="JetBrains Mono, monospace" letterSpacing="2"
+      >
         AN FACTOR
       </text>
 
@@ -97,9 +251,9 @@ export function DualSyringe({ className = "" }: { className?: string }) {
         .ds-d2 { animation-delay: 0.6s; }
         .ds-d3 { animation-delay: 1.2s; }
         @keyframes dsDrip {
-          0%   { transform: translate(0,0);    opacity: 0; }
-          15%  {                                opacity: 1; }
-          100% { transform: translate(40px, 60px); opacity: 0; }
+          0%   { transform: translate(0, 0);        opacity: 0; }
+          15%  {                                     opacity: 1; }
+          100% { transform: translate(28px, 0px);   opacity: 0; }
         }
       `}</style>
     </svg>
