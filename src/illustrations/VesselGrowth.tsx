@@ -71,8 +71,8 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
           <stop offset="100%" stopColor="#d56a2a" />
         </linearGradient>
         <radialGradient id={gFade} cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#F58A4B" stopOpacity="0.50" />
-          <stop offset="55%"  stopColor="#F58A4B" stopOpacity="0.18" />
+          <stop offset="0%"   stopColor="#F58A4B" stopOpacity="0.78" />
+          <stop offset="55%"  stopColor="#F58A4B" stopOpacity="0.35" />
           <stop offset="100%" stopColor="#F58A4B" stopOpacity="0" />
         </radialGradient>
       </defs>
@@ -86,7 +86,7 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         strokeLinejoin="round"
       >
         {/* Big orange glow at the origin corner */}
-        <circle cx="40" cy="40" r="320" fill={`url(#${gFade})`} stroke="none" opacity="0.85" />
+        <circle cx="40" cy="40" r="320" fill={`url(#${gFade})`} stroke="none" opacity="0.97" />
 
         {/* === TRUNKS — 7 main arteries radiating from the corner === */}
         <path className="vg-path vg-t1" strokeWidth="6.5"

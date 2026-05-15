@@ -20,36 +20,36 @@ export function Macrophages({ className = "" }: { className?: string }) {
   const gGlow    = `mc-glow-${u}`;
   const gBigGlow = `mc-bigglow-${u}`;
 
-  // Speckles for focal cell C — center visible at ~(120, 117), shift (-145,-85) from base
+  // Speckles for focal cell C — shifted down +90 SVG units to clear nav bar
   const speckles: Array<[number, number, number, number]> = [
-    [106,  25, 1.4, 0.45], [126,  20, 1.8, 0.55], [151,  30, 1.4, 0.40],
-    [176,  35, 1.6, 0.50], [101,  50, 1.6, 0.45], [129,  55, 2.0, 0.55],
-    [156,  65, 1.4, 0.40], [181,  60, 1.8, 0.50], [ 96,  80, 1.4, 0.40],
-    [126,  85, 1.6, 0.45], [156,  95, 2.0, 0.55], [186,  90, 1.4, 0.40],
-    [106, 110, 1.8, 0.50], [136, 115, 1.4, 0.40], [166, 125, 1.8, 0.50],
-    [116, 140, 1.6, 0.45], [146, 145, 1.4, 0.40], [176, 140, 1.6, 0.45],
+    [106, 115, 1.4, 0.45], [126, 110, 1.8, 0.55], [151, 120, 1.4, 0.40],
+    [176, 125, 1.6, 0.50], [101, 140, 1.6, 0.45], [129, 145, 2.0, 0.55],
+    [156, 155, 1.4, 0.40], [181, 150, 1.8, 0.50], [ 96, 170, 1.4, 0.40],
+    [126, 175, 1.6, 0.45], [156, 185, 2.0, 0.55], [186, 180, 1.4, 0.40],
+    [106, 200, 1.8, 0.50], [136, 205, 1.4, 0.40], [166, 215, 1.8, 0.50],
+    [116, 230, 1.6, 0.45], [146, 235, 1.4, 0.40], [176, 230, 1.6, 0.45],
     // softer dark cluster
-    [141,  80, 2.6, 0.28], [161, 105, 2.4, 0.26], [121, 115, 2.6, 0.28],
+    [141, 170, 2.6, 0.28], [161, 195, 2.4, 0.26], [121, 205, 2.6, 0.28],
   ];
 
-  // Particles fan from cluster (top-left) to bottom-right (vessel area)
+  // Particles fan from cluster (top-left) to bottom-right (vessel area) — cy shifted +90
   const particles = [
-    { cx: 200, cy:  50, dx: 1450, dy: 790, dur: 9.2, delay: 0.0 },
-    { cx: 150, cy:  80, dx: 1400, dy: 760, dur: 9.6, delay: 0.4 },
-    { cx: 100, cy: 120, dx: 1480, dy: 730, dur: 8.8, delay: 0.8 },
-    { cx: 250, cy:  70, dx: 1360, dy: 800, dur: 9.2, delay: 1.2 },
-    { cx: 180, cy: 140, dx: 1420, dy: 710, dur: 9.5, delay: 1.6 },
-    { cx: 120, cy: 180, dx: 1450, dy: 680, dur: 8.9, delay: 2.0 },
-    { cx: 230, cy: 120, dx: 1320, dy: 750, dur: 9.3, delay: 2.4 },
-    { cx:  80, cy: 220, dx: 1500, dy: 640, dur: 9.6, delay: 0.6 },
-    { cx: 160, cy: 200, dx: 1400, dy: 670, dur: 9.0, delay: 1.0 },
-    { cx: 270, cy: 150, dx: 1280, dy: 730, dur: 9.4, delay: 1.4 },
-    { cx:  50, cy: 250, dx: 1550, dy: 610, dur: 9.7, delay: 1.8 },
-    { cx: 190, cy:  30, dx: 1410, dy: 840, dur: 9.0, delay: 2.2 },
-    { cx: 270, cy: 180, dx: 1260, dy: 700, dur: 9.5, delay: 2.6 },
-    { cx:  70, cy: 150, dx: 1530, dy: 700, dur: 9.8, delay: 3.0 },
-    { cx: 220, cy: 230, dx: 1300, dy: 650, dur: 9.3, delay: 0.2 },
-    { cx: 120, cy: 250, dx: 1460, dy: 620, dur: 8.7, delay: 1.5 },
+    { cx: 200, cy: 140, dx: 1450, dy: 790, dur: 9.2, delay: 0.0 },
+    { cx: 150, cy: 170, dx: 1400, dy: 760, dur: 9.6, delay: 0.4 },
+    { cx: 100, cy: 210, dx: 1480, dy: 730, dur: 8.8, delay: 0.8 },
+    { cx: 250, cy: 160, dx: 1360, dy: 800, dur: 9.2, delay: 1.2 },
+    { cx: 180, cy: 230, dx: 1420, dy: 710, dur: 9.5, delay: 1.6 },
+    { cx: 120, cy: 270, dx: 1450, dy: 680, dur: 8.9, delay: 2.0 },
+    { cx: 230, cy: 210, dx: 1320, dy: 750, dur: 9.3, delay: 2.4 },
+    { cx:  80, cy: 310, dx: 1500, dy: 640, dur: 9.6, delay: 0.6 },
+    { cx: 160, cy: 290, dx: 1400, dy: 670, dur: 9.0, delay: 1.0 },
+    { cx: 270, cy: 240, dx: 1280, dy: 730, dur: 9.4, delay: 1.4 },
+    { cx:  50, cy: 340, dx: 1550, dy: 610, dur: 9.7, delay: 1.8 },
+    { cx: 190, cy: 120, dx: 1410, dy: 840, dur: 9.0, delay: 2.2 },
+    { cx: 270, cy: 270, dx: 1260, dy: 700, dur: 9.5, delay: 2.6 },
+    { cx:  70, cy: 240, dx: 1530, dy: 700, dur: 9.8, delay: 3.0 },
+    { cx: 220, cy: 320, dx: 1300, dy: 650, dur: 9.3, delay: 0.2 },
+    { cx: 120, cy: 340, dx: 1460, dy: 620, dur: 8.7, delay: 1.5 },
   ];
 
   return (
@@ -76,14 +76,14 @@ export function Macrophages({ className = "" }: { className?: string }) {
           <stop offset="100%" stopColor="#1E5A8A" stopOpacity="0" />
         </radialGradient>
         <radialGradient id={gBigGlow} cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#7BC9E8" stopOpacity="0.32" />
-          <stop offset="50%"  stopColor="#3FA3D1" stopOpacity="0.12" />
+          <stop offset="0%"   stopColor="#7BC9E8" stopOpacity="0.62" />
+          <stop offset="50%"  stopColor="#3FA3D1" stopOpacity="0.28" />
           <stop offset="100%" stopColor="#1E5A8A" stopOpacity="0" />
         </radialGradient>
       </defs>
 
-      {/* Blue atmospheric glow behind the cluster */}
-      <ellipse cx="140" cy="130" rx="280" ry="260" fill={`url(#${gBigGlow})`} />
+      {/* Blue corner glow — anchored to (0,0) matching VesselGrowth's orange glow style */}
+      <circle cx="0" cy="0" r="520" fill={`url(#${gBigGlow})`} stroke="none" opacity="0.88" />
 
       {/* === CELL A — small, upper-right of C (overlaps C's upper-right body) === */}
       <g className="mc-cell mc-cell-1">
@@ -92,13 +92,13 @@ export function Macrophages({ className = "" }: { className?: string }) {
           stroke="#7BC9E8"
           strokeOpacity="0.22"
           strokeWidth="1.1"
-          d="M210,10 C240,8 265,18 275,40
-             C285,58 280,82 265,94
-             C245,110 217,110 200,98
-             C180,85 173,60 183,40
-             C190,25 200,12 210,10 Z"
+          d="M210,100 C240,98 265,108 275,130
+             C285,148 280,172 265,184
+             C245,200 217,200 200,188
+             C180,175 173,150 183,130
+             C190,115 200,102 210,100 Z"
         />
-        <ellipse cx="225" cy="55" rx="14" ry="11" fill={`url(#${gNuc})`} />
+        <ellipse cx="225" cy="145" rx="14" ry="11" fill={`url(#${gNuc})`} />
       </g>
 
       {/* === CELL B — small, lower-left of C (overlaps C's lower-left body) === */}
@@ -108,35 +108,35 @@ export function Macrophages({ className = "" }: { className?: string }) {
           stroke="#7BC9E8"
           strokeOpacity="0.22"
           strokeWidth="1.1"
-          d="M65,185 C95,183 120,195 128,217
-             C138,240 130,260 112,271
-             C90,285 65,283 48,269
-             C32,255 25,233 35,215
-             C40,200 55,187 65,185 Z"
+          d="M65,275 C95,273 120,285 128,307
+             C138,330 130,350 112,361
+             C90,375 65,373 48,359
+             C32,345 25,323 35,305
+             C40,290 55,277 65,275 Z"
         />
-        <ellipse cx="80" cy="230" rx="14" ry="11" fill={`url(#${gNuc})`} />
+        <ellipse cx="80" cy="320" rx="14" ry="11" fill={`url(#${gNuc})`} />
       </g>
 
-      {/* === CELL C — big focal, closest to corner, bleeds off the top-left edge === */}
+      {/* === CELL C — big focal, closest to corner, top at ~90 SVG units (below nav bar) === */}
       <g className="mc-cell mc-cell-3">
         <path
           fill={`url(#${gBody})`}
           stroke="#9CD9F0"
           strokeOpacity="0.32"
           strokeWidth="1.4"
-          d="M126,0
-             C166,-5 203,7  219,35
-             C233,53 239,77 227,97
-             C241,113 241,140 221,153
-             C227,173 209,195 185,197
-             C186,217 163,230 139,223
-             C123,235 99,235 85,223
-             C59,230 39,217 39,195
-             C19,193 6,173  15,153
-             C1,140  -1,115 15,100
-             C6,80   13,57  31,47
-             C45,25  71,7   101,3
-             C109,0  117,-1 126,0 Z"
+          d="M126,90
+             C166,85 203,97  219,125
+             C233,143 239,167 227,187
+             C241,203 241,230 221,243
+             C227,263 209,285 185,287
+             C186,307 163,320 139,313
+             C123,325 99,325 85,313
+             C59,320 39,307 39,285
+             C19,283 6,263  15,243
+             C1,230  -1,205 15,190
+             C6,170  13,147 31,137
+             C45,115 71,97  101,93
+             C109,90 117,89 126,90 Z"
         />
 
         {/* Speckled cytoplasm */}
@@ -157,14 +157,14 @@ export function Macrophages({ className = "" }: { className?: string }) {
           stroke="#0c2d4a"
           strokeOpacity="0.25"
           strokeWidth="1"
-          d="M116,75
-             C96,75  83,93  83,113
-             C83,133 101,147 126,147
-             C144,147 159,140 167,123
-             C177,128 186,119 186,105
-             C188,88 174,71 157,67
-             C145,65 131,77 123,88
-             C121,80 118,75 116,75 Z"
+          d="M116,165
+             C96,165 83,183 83,203
+             C83,223 101,237 126,237
+             C144,237 159,230 167,213
+             C177,218 186,209 186,195
+             C188,178 174,161 157,157
+             C145,155 131,167 123,178
+             C121,170 118,165 116,165 Z"
         />
       </g>
 
