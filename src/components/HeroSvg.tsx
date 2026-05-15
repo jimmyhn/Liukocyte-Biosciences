@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { VesselGrowth } from "../illustrations/VesselGrowth";
 import { Macrophages } from "../illustrations/Macrophages";
+import { Phagocytosis } from "../illustrations/Phagocytosis";
 import { ScrollCue } from "./ScrollCue";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -17,17 +18,6 @@ const fadeV = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
 };
 
-/**
- * Hero section.
- *
- * Animations:
- *   - Eyebrow + 4 headline lines + paragraph fade in sequentially over
- *     ~0.4 → 3.5 s, while the macrophage particles are first ascending.
- *   - Two CTA buttons appear one at a time, ~2.8 s and ~3.2 s.
- *   - All of the above re-play when the user clicks the logo (Nav fires
- *     an `angel:restart` window event). We bump an `animKey` so the
- *     motion subtree + illustration SVGs all remount.
- */
 export function HeroSvg() {
   const [animKey, setAnimKey] = useState(0);
 
@@ -42,38 +32,50 @@ export function HeroSvg() {
       id="hero"
       className="relative min-h-[100svh] overflow-hidden bg-black"
     >
-      {/* Inner container shares max-w-7xl + px with every Section so the
-          illustrations' right edge lines up with the content right margin. */}
-      <div className="relative mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
-        {/* Macrophages — top-left cluster + phagocytosis cell.
-            Span the full hero so particles can travel diagonally toward the
-            bottom-right (where the vessels live). */}
-        <div
-          key={`macrophages-${animKey}`}
-          className="pointer-events-none absolute inset-0 hidden md:block"
-          aria-hidden="true"
-        >
-          <Macrophages className="h-full w-full" />
-        </div>
+      {/* === ILLUSTRATIONS — sit directly on the section so their corners
+              reach the viewport edges (beyond the max-w-7xl content margins) === */}
 
-        {/* Vessels — emerge from the bottom-right corner with orange glow.
-            Square anchored to the bottom-right; spreads up + left but its
-            paths are constrained to leave the macrophage corner alone. */}
-        <div
-          key={`vessels-${animKey}`}
-          className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-full max-w-[1100px] md:block"
-          aria-hidden="true"
-        >
-          <VesselGrowth origin="bottom-right" className="h-full w-full" />
-        </div>
+      {/* Macrophage cluster — top-left, full-bleed (particles travel diagonally) */}
+      <div
+        key={`cluster-${animKey}`}
+        className="pointer-events-none absolute inset-0 z-0 hidden md:block"
+        aria-hidden="true"
+      >
+        <Macrophages className="h-full w-full" />
+      </div>
 
-        {/* Text content — anchored near the top with a small gap under nav */}
+      {/* Phagocytosis — bottom-left corner, separate small SVG */}
+      <div
+        key={`phago-${animKey}`}
+        className="pointer-events-none absolute bottom-0 left-0 z-0 hidden w-[28vw] max-w-[360px] aspect-[5/4] md:block"
+        aria-hidden="true"
+      >
+        <Phagocytosis className="h-full w-full" />
+      </div>
+
+      {/* Vessels — bottom-right, full-bleed (corner glow at viewport corner) */}
+      <div
+        key={`vessels-${animKey}`}
+        className="pointer-events-none absolute bottom-0 right-0 z-0 hidden h-full w-full max-w-[1100px] md:block"
+        aria-hidden="true"
+      >
+        <VesselGrowth origin="bottom-right" className="h-full w-full" />
+      </div>
+
+      {/* === DARK BACKDROP behind text for readability === */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/85 via-black/55 to-transparent"
+      />
+
+      {/* === TEXT — bound to max-w-7xl, padding aligned with sections === */}
+      <div className="relative z-10 mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
         <motion.div
           key={`text-${animKey}`}
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { delayChildren: 0.3 } } }}
-          className="relative z-10 max-w-3xl pt-[180px] pb-12 md:pt-44"
+          className="relative max-w-3xl pt-[180px] pb-12 md:pt-44"
         >
           <motion.p
             variants={fadeV}
@@ -83,7 +85,6 @@ export function HeroSvg() {
             Liukocyte BioSciences · UC Irvine
           </motion.p>
 
-          {/* Each line as its own motion span so they cascade in */}
           <h1 className="font-display font-semibold leading-[0.92] tracking-tightest text-[clamp(38px,7vw,96px)]">
             {["Immune", "Innovation", "for Active", "Healing."].map(
               (line, i) => (
@@ -130,7 +131,6 @@ export function HeroSvg() {
         </motion.div>
       </div>
 
-      {/* Scroll cue, bottom-center of hero */}
       <ScrollCue
         label="The Need"
         href="#needs"
