@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { VesselGrowth } from "../illustrations/VesselGrowth";
-import { Macrophages } from "../illustrations/Macrophages";
 import { ScrollCue } from "./ScrollCue";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -29,43 +27,16 @@ export function HeroSvg() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] overflow-hidden bg-black"
+      className="relative min-h-[100svh] overflow-hidden"
     >
-      {/* === ILLUSTRATIONS — sit directly on the section so their corners
-              reach the viewport edges (beyond the max-w-7xl content margins) === */}
-
-      {/* Macrophage cluster — top-left corner, particles drift diagonally to bottom-right */}
-      <div
-        key={`cluster-${animKey}`}
-        className="pointer-events-none absolute inset-0 z-0 hidden md:block"
-        aria-hidden="true"
-      >
-        <Macrophages className="h-full w-full" />
-      </div>
-
-      {/* Vessels — bottom-right, full-bleed (corner glow at viewport corner) */}
-      <div
-        key={`vessels-${animKey}`}
-        className="pointer-events-none absolute bottom-0 right-0 z-0 hidden h-full w-full max-w-[1100px] md:block"
-        aria-hidden="true"
-      >
-        <VesselGrowth origin="bottom-right" className="h-full w-full" />
-      </div>
-
-      {/* === DARK BACKDROP behind text for readability — stronger on the left === */}
+      {/* Directional dark overlay — strong on the left for text legibility,
+          fades out right so the vessel glow stays vivid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/95 via-black/75 to-black/10"
+        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/80 via-black/45 to-transparent"
       />
 
-      {/* === SCROLL TRANSITION — fades the hero illustrations into the
-              ink-950 background at the bottom edge so section 2 emerges seamlessly === */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] h-48 bg-gradient-to-b from-transparent to-ink-950"
-      />
-
-      {/* === TEXT — bound to max-w-7xl, padding aligned with sections === */}
+      {/* Text content */}
       <div className="relative z-10 mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
         <motion.div
           key={`text-${animKey}`}
@@ -74,11 +45,6 @@ export function HeroSvg() {
           variants={{ show: { transition: { delayChildren: 0.3 } } }}
           className="relative max-w-3xl pt-[180px] pb-12 md:pt-44"
         >
-          {/* Frosted-glass text-box backdrop for contrast */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -inset-x-6 -inset-y-4 -z-10 rounded-3xl bg-black/45 backdrop-blur-md ring-1 ring-white/5"
-          />
           <motion.p
             variants={fadeV}
             transition={{ duration: 0.6, ease, delay: 0.2 }}
