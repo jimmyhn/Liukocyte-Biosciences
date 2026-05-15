@@ -29,7 +29,11 @@ export function HeroSvg() {
       id="hero"
       className="relative min-h-[100svh] overflow-hidden"
     >
-
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[0%] h-[85%] left-[10%] md:left-[15%] w-full md:w-[50%] z-[5] 
+                  bg-gradient-to-r from-transparent via-black/90 to-transparent blur-3xl"
+      />
 
       {/* Text content */}
       <div className="relative z-10 mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
