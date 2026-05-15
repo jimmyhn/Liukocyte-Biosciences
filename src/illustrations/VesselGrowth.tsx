@@ -183,8 +183,21 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         <path className="vg-path vg-c20" strokeWidth="1.1" d="M460,410 C490,440 510,470 530,500" />
         <path className="vg-path vg-c21" strokeWidth="1.0" d="M460,410 C440,450 430,480 420,520" />
 
-        {/* B13 tip ≈ (400, 490) */}
-        <path className="vg-path vg-c22" strokeWidth="1.0" d="M400,490 C420,520 430,550 440,580" />
+        {/* B13 tip ≈ (400, 490) — pulled back so it doesn't cross the logo at hero top-center */}
+        <path className="vg-path vg-c22" strokeWidth="1.0" d="M400,490 C415,505 425,515 432,525" />
+
+        {/* === MACROPHAGE-REACHING BRANCHES — extend up-left toward the
+              macrophage cluster at the hero's top-left corner.
+              Endpoints intentionally exceed the original x+y<800 constraint. === */}
+        <path className="vg-path vg-bm1" strokeWidth="2.6"
+          d={`M${T3.x},${T3.y} C540,260 555,360 565,440`} />
+        <path className="vg-path vg-bm2" strokeWidth="2.2"
+          d={`M${T1.x},${T1.y} C480,350 520,420 545,485`} />
+        {/* Capillary tips off the macrophage-reaching branches */}
+        <path className="vg-path vg-bm3" strokeWidth="1.2"
+          d="M565,440 C575,460 580,475 585,490" />
+        <path className="vg-path vg-bm4" strokeWidth="1.0"
+          d="M545,485 C560,495 568,505 575,510" />
       </g>
 
       <style>{`
@@ -243,6 +256,11 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         .vg-c20 { animation-delay: 9.4s; }
         .vg-c21 { animation-delay: 9.5s; }
         .vg-c22 { animation-delay: 9.6s; }
+        /* Macrophage-reaching branches grow with the upper branches, tips at the end */
+        .vg-bm1 { animation-delay: 8.2s; }
+        .vg-bm2 { animation-delay: 8.4s; }
+        .vg-bm3 { animation-delay: 9.4s; }
+        .vg-bm4 { animation-delay: 9.6s; }
 
         @keyframes vgDraw {
           0%   { stroke-dashoffset: 1000; opacity: 0;    }

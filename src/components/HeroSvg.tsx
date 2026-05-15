@@ -52,10 +52,17 @@ export function HeroSvg() {
         <VesselGrowth origin="bottom-right" className="h-full w-full" />
       </div>
 
-      {/* === DARK BACKDROP behind text for readability === */}
+      {/* === DARK BACKDROP behind text for readability — stronger on the left === */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/85 via-black/55 to-transparent"
+        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-r from-black/95 via-black/75 to-black/10"
+      />
+
+      {/* === SCROLL TRANSITION — fades the hero illustrations into the
+              ink-950 background at the bottom edge so section 2 emerges seamlessly === */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] h-48 bg-gradient-to-b from-transparent to-ink-950"
       />
 
       {/* === TEXT — bound to max-w-7xl, padding aligned with sections === */}
@@ -67,6 +74,11 @@ export function HeroSvg() {
           variants={{ show: { transition: { delayChildren: 0.3 } } }}
           className="relative max-w-3xl pt-[180px] pb-12 md:pt-44"
         >
+          {/* Frosted-glass text-box backdrop for contrast */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -inset-x-6 -inset-y-4 -z-10 rounded-3xl bg-black/45 backdrop-blur-md ring-1 ring-white/5"
+          />
           <motion.p
             variants={fadeV}
             transition={{ duration: 0.6, ease, delay: 0.2 }}
