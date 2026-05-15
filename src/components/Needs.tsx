@@ -5,11 +5,81 @@ import { HealingPhases } from "../illustrations/HealingPhases";
 import { ExistingFallShort } from "../illustrations/ExistingFallShort";
 import { ScrollCue } from "./ScrollCue";
 
-const stats = [
-  { num: "160,000", label: "Skin grafts performed annually in the U.S." },
-  { num: "1 in 4",  label: "Graft procedures fail on average." },
-  { num: "$32B",    label: "Annual U.S. economic burden of chronic wounds." },
-];
+/** Icon: 4 person silhouettes — first one accented (orange), rest muted. */
+function FourPeopleIcon({ className = "" }: { className?: string }) {
+  // Single person silhouette path (head + body)
+  const person = (
+    <g>
+      <circle cx="20" cy="14" r="9" />
+      <path d="M5,60 C5,44 11,32 20,32 C29,32 35,44 35,60 L35,72 L5,72 Z" />
+    </g>
+  );
+  return (
+    <svg
+      viewBox="0 0 200 80"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g fill="#F58A4B">
+        <g transform="translate(0,0)">{person}</g>
+      </g>
+      <g fill="#5BB0DA" opacity="0.85">
+        <g transform="translate(50,0)">{person}</g>
+        <g transform="translate(100,0)">{person}</g>
+        <g transform="translate(150,0)">{person}</g>
+      </g>
+    </svg>
+  );
+}
+
+/** Icon: 3 ascending bars with an upward arrow and a dollar sign. */
+function GrowthBarsIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 200 120"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Baseline */}
+      <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      {/* Three orange bars, ascending */}
+      <rect x="30"  y="70" width="22" height="30" fill="#F58A4B" />
+      <rect x="68"  y="50" width="22" height="50" fill="#F58A4B" />
+      <rect x="106" y="28" width="22" height="72" fill="#F58A4B" />
+      {/* Upward arrow trending across the bars */}
+      <path
+        d="M20,88 L60,68 L80,80 L100,52 L120,62 L160,22"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Arrowhead */}
+      <path
+        d="M148,18 L162,18 L162,32"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Dollar sign — top-left, signifying rising cost */}
+      <text
+        x="158"
+        y="86"
+        fontSize="32"
+        fontWeight="700"
+        fill="#F58A4B"
+        fontFamily="ui-sans-serif, system-ui, sans-serif"
+      >
+        $
+      </text>
+    </svg>
+  );
+}
 
 export function Needs() {
   return (
@@ -39,29 +109,61 @@ export function Needs() {
         </motion.p>
       </motion.div>
 
-      {/* Stats strip */}
-      <motion.dl
+      {/* Stats — first thing after the heading */}
+      <motion.div
         variants={stagger(0.05, 0.12)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6"
       >
-        {stats.map((s) => (
-          <motion.div
-            key={s.num}
-            variants={fadeUp}
-            className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1"
-          >
-            <dt className="font-display text-4xl md:text-5xl font-semibold text-grad">
-              {s.num}
-            </dt>
-            <dd className="mt-3 text-sm text-bone-300 leading-relaxed">
-              {s.label}
-            </dd>
-          </motion.div>
-        ))}
-      </motion.dl>
+        {/* LEFT — 160,000 Skin Grafts (text-only) */}
+        <motion.div
+          variants={fadeUp}
+          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col"
+        >
+          <div className="font-display text-5xl md:text-6xl font-semibold text-angel-orange leading-none">
+            160,000
+          </div>
+          <div className="mt-3 font-display text-2xl md:text-3xl font-semibold text-bone-100">
+            Skin Grafts
+          </div>
+          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
+            Performed annually in the US treating burns, chronic wounds,
+            traumatic injuries, and post-surgical defects.
+          </p>
+        </motion.div>
+
+        {/* MIDDLE — 1 in 4 with 4-people graphic */}
+        <motion.div
+          variants={fadeUp}
+          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center"
+        >
+          <FourPeopleIcon className="w-full max-w-[220px] h-auto" />
+          <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
+            1 in 4
+          </div>
+          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
+            Skin graft procedures fail on average — leaving wounds open to
+            chronic complications.
+          </p>
+        </motion.div>
+
+        {/* RIGHT — $32 Billion with growth bars */}
+        <motion.div
+          variants={fadeUp}
+          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center text-bone-100"
+        >
+          <GrowthBarsIcon className="w-full max-w-[220px] h-auto" />
+          <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
+            $32 Billion
+          </div>
+          <p className="mt-4 text-sm md:text-base text-bone-300 leading-relaxed">
+            Annual economic burden in the US from chronic wounds and failed
+            graft procedures.
+          </p>
+        </motion.div>
+      </motion.div>
 
       {/* Healing phase pipeline */}
       <motion.div
