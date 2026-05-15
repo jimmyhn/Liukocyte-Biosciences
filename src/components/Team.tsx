@@ -40,7 +40,7 @@ const team: Member[] = [
     bio: "Background in biomaterial research and academic communication; leads product demos, investor pitches, team coordination, and milestone execution.",
     photo: "/team-devin.png",
     linkedin: "https://www.linkedin.com/in/devincjohnson/",
-    adjust: { x: 0, y: 0, zoom: 1 },
+    adjust: { x: 3, y: 0, zoom: 1 },
   },
   {
     name: "Catherine Salgado",
@@ -48,7 +48,7 @@ const team: Member[] = [
     bio: "Background in biomaterials and cell culture; supports experimental validation, biological integration, and product feasibility.",
     photo: "/team-catherine.png",
     linkedin: "https://www.linkedin.com/in/catherine-salgado-751242241/",
-    adjust: { x: 0, y: 0, zoom: 1 },
+    adjust: { x: -6, y: -12, zoom: 1 },
   },
   {
     name: "Kristin Hagen",
@@ -56,7 +56,7 @@ const team: Member[] = [
     bio: "Extensive business experience; owns the company's business model and client interviews — driving clinical relevance and scalability.",
     photo: "/team-kristin.png",
     linkedin: "https://www.linkedin.com/in/kristin-hagen-bme/",
-    adjust: { x: 0, y: 0, zoom: 1 },
+    adjust: { x: 3, y: -2, zoom: 1 },
   },
   {
     name: "Jimmy Nguyen",
@@ -64,7 +64,7 @@ const team: Member[] = [
     bio: "Materials research and engineering design background; responsible for cost analysis, manufacturing feasibility, and financial stability.",
     photo: "/team-jimmy.png",
     linkedin: "https://www.linkedin.com/in/jimmyhn/",
-    adjust: { x: 0, y: 0, zoom: 1 },
+    adjust: { x: -10, y: -12, zoom: 1 },
   },
   {
     name: "Ronald Nguyen",
@@ -72,7 +72,7 @@ const team: Member[] = [
     bio: "Conducts biomaterial research and translates validated wet-lab findings into scalable, market-ready product design.",
     photo: "/team-ronald.png",
     linkedin: "https://www.linkedin.com/in/ronald-nguyen/",
-    adjust: { x: 0, y: 0, zoom: 1 },
+    adjust: { x: -15, y: -5, zoom: 1 },
   },
 ];
 
