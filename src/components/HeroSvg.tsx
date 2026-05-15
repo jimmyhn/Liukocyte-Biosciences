@@ -45,22 +45,26 @@ export function HeroSvg() {
       {/* Inner container shares max-w-7xl + px with every Section so the
           illustrations' right edge lines up with the content right margin. */}
       <div className="relative mx-auto h-full min-h-[100svh] w-full max-w-7xl px-6 md:px-10">
-        {/* Vessel-regrowth illustration, anchored to top-right of CONTENT */}
-        <div
-          key={`vessels-${animKey}`}
-          className="pointer-events-none absolute -top-10 right-0 hidden w-[44vw] max-w-[640px] aspect-square opacity-90 md:block"
-          aria-hidden="true"
-        >
-          <VesselGrowth origin="top-right" className="h-full w-full" />
-        </div>
-
-        {/* Macrophages — full-height right panel, also anchored to content */}
+        {/* Macrophages — top-left cluster + phagocytosis cell.
+            Span the full hero so particles can travel diagonally toward the
+            bottom-right (where the vessels live). */}
         <div
           key={`macrophages-${animKey}`}
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[44vw] max-w-[560px] md:block"
+          className="pointer-events-none absolute inset-0 hidden md:block"
           aria-hidden="true"
         >
           <Macrophages className="h-full w-full" />
+        </div>
+
+        {/* Vessels — emerge from the bottom-right corner with orange glow.
+            Square anchored to the bottom-right; spreads up + left but its
+            paths are constrained to leave the macrophage corner alone. */}
+        <div
+          key={`vessels-${animKey}`}
+          className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-full max-w-[1100px] md:block"
+          aria-hidden="true"
+        >
+          <VesselGrowth origin="bottom-right" className="h-full w-full" />
         </div>
 
         {/* Text content — anchored near the top with a small gap under nav */}
