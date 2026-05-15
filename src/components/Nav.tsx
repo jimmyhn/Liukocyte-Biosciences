@@ -4,13 +4,13 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 
 const links = [
-  { href: "#hero",        num: "01", label: "Home"        },
-  { href: "#needs",       num: "02", label: "The Need"    },
-  { href: "#product",     num: "03", label: "Product"     },
-  { href: "#competition", num: "04", label: "Competition" },
-  { href: "#market",      num: "05", label: "Market"      },
-  { href: "#team",        num: "06", label: "Team"        },
-  { href: "#pitch",       num: "07", label: "Pitch"       },
+  { href: "#hero",        label: "Home"        },
+  { href: "#needs",       label: "The Need"    },
+  { href: "#product",     label: "Product"     },
+  { href: "#competition", label: "Competition" },
+  { href: "#market",      label: "Market"      },
+  { href: "#team",        label: "Team"        },
+  { href: "#pitch",       label: "Pitch"       },
 ];
 
 export function Nav() {
@@ -39,10 +39,16 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Logo click: keep scroll-to-top behavior, and broadcast a restart event
+  // so the hero re-plays its intro animations and the illustrations restart.
+  const handleLogoClick = () => {
+    window.dispatchEvent(new Event("angel:restart"));
+  };
+
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 py-4">
-        {/* Backdrop — fades opacity + blur smoothly with scroll. No border, so nothing snaps. */}
+      {/* Top bar: centered logo, no menu button */}
+      <header className="fixed inset-x-0 top-0 z-50 py-2">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 transition-[opacity,backdrop-filter] duration-500 ease-out"
@@ -51,23 +57,30 @@ export function Nav() {
             backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
             WebkitBackdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0) 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0) 100%)",
           }}
         />
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
-          <a href="#hero" aria-label="ANGel home" className="block">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-center px-6 md:px-10">
+          <a
+            href="#hero"
+            aria-label="ANGel home"
+            onClick={handleLogoClick}
+            className="block"
+          >
             <Logo />
           </a>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-            className="grid h-11 w-11 place-items-center rounded-full ring-hairline hover:bg-white/5 transition-colors"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
         </div>
       </header>
+
+      {/* Floating menu button — bottom-left */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Open menu"
+        className="fixed bottom-5 left-5 z-40 grid h-12 w-12 place-items-center rounded-full bg-black/70 text-white ring-1 ring-white/15 backdrop-blur-md transition-colors hover:bg-black/90 hover:ring-white/30"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
 
       <AnimatePresence>
         {open && (
@@ -89,10 +102,10 @@ export function Nav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.5, ease: [0.7, 0, 0.2, 1] }}
-            className="fixed inset-y-0 right-0 z-[65] w-[min(440px,92vw)] bg-ink-900 hairline-b border-l border-white/10 px-10 py-12 flex flex-col"
+            className="fixed inset-y-0 right-0 z-[65] flex w-[min(440px,92vw)] flex-col border-l border-white/10 bg-ink-900 px-10 py-12"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-12">
+            <div className="mb-12 flex items-center justify-between">
               <Logo />
               <button
                 type="button"
@@ -115,12 +128,9 @@ export function Nav() {
                   <a
                     href={l.href}
                     onClick={() => setTimeout(() => setOpen(false), 100)}
-                    className="group flex items-baseline gap-4 py-2 font-display text-3xl md:text-4xl font-medium tracking-tight transition-colors hover:text-grad"
+                    className="group block py-2 font-display text-3xl md:text-4xl font-medium tracking-tight transition-colors hover:text-grad"
                   >
-                    <span className="font-mono text-[11px] tracking-[0.2em] text-bone-400">
-                      {l.num}
-                    </span>
-                    <span className="transition-transform group-hover:translate-x-1">
+                    <span className="inline-block transition-transform group-hover:translate-x-1">
                       {l.label}
                     </span>
                   </a>

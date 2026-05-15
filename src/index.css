@@ -5,6 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* nav (~128 px tall with 2× logo) + ~½ inch gap */
+    scroll-padding-top: 180px;
   }
   body {
     font-family: "Inter", system-ui, -apple-system, sans-serif;
