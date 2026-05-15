@@ -99,17 +99,9 @@ export function Needs() {
           <br />
           <span className="text-grad">high</span> failure chance for <span className="text-grad">skin grafts</span>
         </motion.h2>
-        <motion.p
-          variants={fadeUp}
-          className="mt-6 text-lg text-bone-300 max-w-2xl"
-        >
-          Passive protection isn't enough. Wounds need activation — angiogenesis
-          driven by M2 macrophage signaling. Chronic inflammation blocks that
-          shift, and the wound bed stays starved of new vessels.
-        </motion.p>
       </motion.div>
 
-      {/* Stats — first thing after the heading */}
+      {/* Stats — spacing between heading and stats controlled by mt-14 below */}
       <motion.div
         variants={stagger(0.05, 0.12)}
         initial="hidden"
@@ -120,7 +112,7 @@ export function Needs() {
         {/* LEFT — 160,000 Skin Grafts (text-only) */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col"
+          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col"
         >
           <div className="font-display text-5xl md:text-6xl font-semibold text-angel-orange leading-none">
             160,000
@@ -137,7 +129,7 @@ export function Needs() {
         {/* MIDDLE — 1 in 4 with 4-people graphic */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center"
+          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center"
         >
           <FourPeopleIcon className="w-full max-w-[220px] h-auto" />
           <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
@@ -152,7 +144,7 @@ export function Needs() {
         {/* RIGHT — $32 Billion with growth bars */}
         <motion.div
           variants={fadeUp}
-          className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center text-bone-100"
+          className="rounded-2xl bg-white/[0.02] p-8 transition-transform hover:-translate-y-1 flex flex-col items-center text-center text-bone-100"
         >
           <GrowthBarsIcon className="w-full max-w-[220px] h-auto" />
           <div className="mt-5 font-display text-4xl md:text-5xl font-semibold text-angel-orange leading-none">
@@ -173,14 +165,16 @@ export function Needs() {
         viewport={{ once: true, amount: 0.4 }}
         className="mt-20 rounded-3xl bg-white/[0.015] ring-1 ring-white/8 p-8 md:p-12"
       >
-        <div className="flex flex-wrap items-end justify-between gap-3 mb-10">
+        <div className="mb-10">
           <h3 className="font-display text-2xl md:text-3xl font-semibold">
-            The four phases of healing —
-            <br className="hidden md:block" />
-            <span className="text-grad"> ANGel reignites the path.</span>
+            Angiogenesis &amp; Why It&apos;s{" "}
+            <span className="text-angel-orange">Delayed</span>
           </h3>
-          <p className="font-mono text-xs uppercase tracking-widest text-bone-400">
-            M1 → M2 macrophage shift
+          <p className="mt-3 text-base text-bone-300 max-w-2xl">
+            Wound healing follows four sequential phases. When macrophages fail to
+            shift from the inflammatory M1 state to the regenerative M2 state,
+            the process stalls — new blood vessels never form, and the graft
+            has no foundation to take hold.
           </p>
         </div>
         <HealingPhases />

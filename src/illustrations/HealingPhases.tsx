@@ -1,67 +1,104 @@
 /**
- * Healing-phases pipeline: Hemostasis → Inflammation → Proliferation → Maturation.
- * Inspired by the UROP poster's "stuck in inflammation" diagram.
- * The Inflammation node is highlighted in orange and labeled "STUCK HERE";
- * Proliferation gets an "ANGel reactivates" callout.
+ * Four-phase healing pipeline — chevron/arrow chain.
+ * 01 HEMOSTASIS (dark navy), 02 INFLAMMATION (orange),
+ * 03 PROLIFERATION (medium blue), 04 MATURATION (light blue)
  */
 const phases = [
-  { name: "Hemostasis",    state: "done" },
-  { name: "Inflammation",  state: "stuck" },
-  { name: "Proliferation", state: "blocked", callout: "ANGel reactivates" },
-  { name: "Maturation",    state: "blocked" },
+  { num: "01", label: "Hemostasis",     fill: "#2C3E6B", text: "#FFFFFF" },
+  { num: "02", label: "Inflammation",   fill: "#F58A4B", text: "#FFFFFF" },
+  { num: "03", label: "Proliferation",  fill: "#4A72B0", text: "#FFFFFF" },
+  { num: "04", label: "Maturation",     fill: "#7EC8E3", text: "#0D1B2A" },
 ] as const;
 
-export function HealingPhases({ className = "" }: { className?: string }) {
-  return (
-    <div className={`relative ${className}`}>
-      {/* connecting line */}
-      <div className="absolute top-[34px] left-[8%] right-[8%] h-px bg-white/12">
-        <div className="h-full w-[42%] bg-gradient-to-r from-angel-blue via-angel-orange to-white/0" />
-      </div>
+// Chevron geometry: each arrow is a parallelogram with a right-pointing point.
+// viewBox per arrow: 220 wide × 80 tall. Overlap between adjacent arrows: 20px.
+const W = 220;  // full width of one chevron cell
+const H = 80;   // height
+const TIP = 24; // horizontal depth of the arrow tip/notch
+const GAP = -20; // negative gap = overlap so arrows interlock
 
-      <div className="relative grid grid-cols-4 gap-2 md:gap-4">
-        {phases.map((p, i) => (
-          <div key={p.name} className="flex flex-col items-center text-center">
-            <div className="relative grid h-[68px] w-[68px] place-items-center">
-              {/* outer ring */}
-              <span
-                className={`absolute inset-0 rounded-full ${
-                  p.state === "done"
-                    ? "bg-angel-blue/15 ring-1 ring-angel-blue/40"
-                    : p.state === "stuck"
-                    ? "bg-angel-orange/20 ring-1 ring-angel-orange"
-                    : "bg-white/[0.04] ring-1 ring-white/10"
-                }`}
+export function HealingPhases({ className = "" }: { className?: string }) {
+  const n = phases.length;
+  // Total SVG width: n arrows each W wide, overlapping by |GAP| between them
+  const totalW = n * W + (n - 1) * GAP;
+
+  // Chevron polygon points for position i
+  // Left edge: vertical for i===0, notched for i>0
+  // Right edge: always arrow point
+  function chevronPoints(i: number): string {
+    const x = i * (W + GAP);
+    const isFirst = i === 0;
+    if (isFirst) {
+      // Flat left edge
+      return [
+        `${x},0`,
+        `${x + W - TIP},0`,
+        `${x + W},${H / 2}`,
+        `${x + W - TIP},${H}`,
+        `${x},${H}`,
+      ].join(" ");
+    }
+    // Left side has an inward notch matching the previous arrow's tip
+    return [
+      `${x},0`,
+      `${x + W - TIP},0`,
+      `${x + W},${H / 2}`,
+      `${x + W - TIP},${H}`,
+      `${x},${H}`,
+      `${x + TIP},${H / 2}`,
+    ].join(" ");
+  }
+
+  return (
+    <div className={`w-full overflow-x-auto ${className}`}>
+      <svg
+        viewBox={`0 0 ${totalW} ${H}`}
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Four phases of wound healing"
+        className="w-full h-auto min-w-[480px]"
+      >
+        {phases.map((p, i) => {
+          const x = i * (W + GAP);
+          const cx = x + W / 2 + (i > 0 ? TIP / 2 : 0);
+          return (
+            <g key={p.num}>
+              <polygon
+                points={chevronPoints(i)}
+                fill={p.fill}
               />
-              {/* core dot */}
-              <span
-                className={`relative grid h-7 w-7 place-items-center rounded-full ${
-                  p.state === "done"
-                    ? "bg-angel-blue text-black"
-                    : p.state === "stuck"
-                    ? "bg-angel-orange text-black animate-pulse"
-                    : "bg-white/10 text-bone-400"
-                }`}
+              {/* Number */}
+              <text
+                x={cx}
+                y={H * 0.36}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill={p.text}
+                fontSize="11"
+                fontFamily="ui-monospace, monospace"
+                fontWeight="600"
+                opacity="0.75"
               >
-                <span className="font-mono text-[10px] font-semibold">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </span>
-            </div>
-            <p className="mt-4 font-display text-sm font-medium">{p.name}</p>
-            {p.state === "stuck" && (
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-angel-orange">
-                Stuck here
-              </p>
-            )}
-            {"callout" in p && (
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-angel-sky">
-                {(p as { callout: string }).callout}
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
+                {p.num}
+              </text>
+              {/* Phase name */}
+              <text
+                x={cx}
+                y={H * 0.65}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill={p.text}
+                fontSize="12"
+                fontFamily="ui-sans-serif, system-ui, sans-serif"
+                fontWeight="700"
+                letterSpacing="0.04em"
+              >
+                {p.label.toUpperCase()}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
