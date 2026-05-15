@@ -44,17 +44,18 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
     "bottom-left":  "scale(1, -1) translate(0, -600)",
   }[origin];
 
-  // Shared waypoints (fork / tip coords). Reused for parent endpoints +
-  // child start points so the tree always connects cleanly.
-  const F1 = { x: 180, y: 160 };  // trunk-A first fork
-  const F2 = { x: 320, y: 230 };  // trunk-A second fork
-  const F3 = { x: 180, y: 280 };  // trunk-B fork
-  const F4 = { x: 280, y: 120 };  // trunk-C fork
-  const F5 = { x: 120, y: 200 };  // trunk-D fork
-  const T1 = { x: 440, y: 280 };  // trunk-A tip
-  const T2 = { x: 320, y: 380 };  // trunk-B tip
-  const T3 = { x: 520, y: 180 };  // trunk-C tip
-  const T4 = { x: 180, y: 440 };  // trunk-D tip
+  // Waypoints redesigned for a wide HORIZONTAL fan spreading left across the
+  // screen — vessels expand primarily leftward with only moderate upward reach.
+  // High x in path coords = left on screen (after the bottom-right rotation).
+  const F1 = { x: 200, y: 100 };  // trunk-A first fork
+  const F2 = { x: 350, y: 120 };  // trunk-A second fork
+  const F3 = { x: 155, y: 200 };  // trunk-B fork
+  const F4 = { x: 310, y:  70 };  // trunk-C fork (very horizontal)
+  const F5 = { x:  95, y: 275 };  // trunk-D fork (modest height)
+  const T1 = { x: 490, y: 150 };  // trunk-A tip
+  const T2 = { x: 275, y: 295 };  // trunk-B tip
+  const T3 = { x: 525, y:  90 };  // trunk-C tip (very horizontal)
+  const T4 = { x: 170, y: 370 };  // trunk-D tip (moderate height only)
 
   return (
     <svg
@@ -88,118 +89,104 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         {/* Big orange glow at the origin corner */}
         <circle cx="40" cy="40" r="320" fill={`url(#${gFade})`} stroke="none" opacity="0.97" />
 
-        {/* === TRUNKS — 7 main arteries radiating from the corner === */}
+        {/* === TRUNKS — 7 main arteries radiating from the corner in a wide
+              horizontal fan. High x in path coords = left on screen. === */}
         <path className="vg-path vg-t1" strokeWidth="6.5"
-          d={`M40,40 C100,90 140,140 ${F1.x},${F1.y}`} />
+          d={`M40,40 C90,55 145,75 ${F1.x},${F1.y}`} />
         <path className="vg-path vg-t2" strokeWidth="5.8"
-          d={`M${F1.x},${F1.y} C240,180 290,210 ${F2.x},${F2.y}`} />
+          d={`M${F1.x},${F1.y} C260,108 305,115 ${F2.x},${F2.y}`} />
         <path className="vg-path vg-t3" strokeWidth="4.8"
-          d={`M${F2.x},${F2.y} C370,250 410,270 ${T1.x},${T1.y}`} />
+          d={`M${F2.x},${F2.y} C410,130 452,140 ${T1.x},${T1.y}`} />
         <path className="vg-path vg-t4" strokeWidth="5.4"
-          d={`M40,40 C80,140 140,220 ${F3.x},${F3.y}`} />
+          d={`M40,40 C65,100 105,148 ${F3.x},${F3.y}`} />
         <path className="vg-path vg-t5" strokeWidth="4.4"
-          d={`M${F3.x},${F3.y} C220,320 280,350 ${T2.x},${T2.y}`} />
+          d={`M${F3.x},${F3.y} C195,238 238,265 ${T2.x},${T2.y}`} />
         <path className="vg-path vg-t6" strokeWidth="5.6"
-          d={`M40,40 C140,70 220,90 ${F4.x},${F4.y} C380,140 460,160 ${T3.x},${T3.y}`} />
+          d={`M40,40 C120,48 215,55 ${F4.x},${F4.y} C385,72 455,80 ${T3.x},${T3.y}`} />
         <path className="vg-path vg-t7" strokeWidth="4.8"
-          d={`M40,40 C60,120 90,160 ${F5.x},${F5.y} C140,260 170,360 ${T4.x},${T4.y}`} />
+          d={`M40,40 C48,130 68,200 ${F5.x},${F5.y} C112,315 142,342 ${T4.x},${T4.y}`} />
 
-        {/* === BRANCHES — sprout from fork points and trunk tips === */}
+        {/* === BRANCHES — spread wide and low, only modest upward climb === */}
         {/* From F1 */}
         <path className="vg-path vg-b1" strokeWidth="3.4"
-          d={`M${F1.x},${F1.y} C220,120 270,90 320,80`} />
+          d={`M${F1.x},${F1.y} C225,72 255,62 285,55`} />
         <path className="vg-path vg-b2" strokeWidth="3.0"
-          d={`M${F1.x},${F1.y} C160,220 140,250 130,290`} />
+          d={`M${F1.x},${F1.y} C172,158 155,198 140,228`} />
 
         {/* From F2 */}
         <path className="vg-path vg-b3" strokeWidth="3.2"
-          d={`M${F2.x},${F2.y} C380,180 430,160 480,140`} />
+          d={`M${F2.x},${F2.y} C392,88 425,78 455,68`} />
         <path className="vg-path vg-b4" strokeWidth="2.8"
-          d={`M${F2.x},${F2.y} C300,290 290,330 280,370`} />
+          d={`M${F2.x},${F2.y} C345,188 338,220 330,252`} />
 
         {/* From F3 */}
         <path className="vg-path vg-b5" strokeWidth="2.8"
-          d={`M${F3.x},${F3.y} C220,260 250,240 290,230`} />
+          d={`M${F3.x},${F3.y} C198,188 235,182 268,178`} />
         <path className="vg-path vg-b6" strokeWidth="2.6"
-          d={`M${F3.x},${F3.y} C160,340 140,390 130,430`} />
+          d={`M${F3.x},${F3.y} C132,248 110,278 90,310`} />
 
         {/* From F4 */}
         <path className="vg-path vg-b7" strokeWidth="3.0"
-          d={`M${F4.x},${F4.y} C330,90 380,60 430,40`} />
+          d={`M${F4.x},${F4.y} C348,44 378,34 408,28`} />
         <path className="vg-path vg-b8" strokeWidth="2.6"
-          d={`M${F4.x},${F4.y} C260,170 230,200 200,220`} />
+          d={`M${F4.x},${F4.y} C295,118 272,158 252,188`} />
 
         {/* From F5 */}
         <path className="vg-path vg-b9" strokeWidth="2.6"
-          d={`M${F5.x},${F5.y} C90,260 80,300 70,340`} />
+          d={`M${F5.x},${F5.y} C72,325 62,358 52,390`} />
         <path className="vg-path vg-b10" strokeWidth="2.4"
-          d={`M${F5.x},${F5.y} C170,180 200,170 240,150`} />
+          d={`M${F5.x},${F5.y} C155,262 195,252 232,242`} />
 
         {/* From trunk tips */}
         <path className="vg-path vg-b11" strokeWidth="2.8"
-          d={`M${T1.x},${T1.y} C490,260 530,250 570,240`} />
+          d={`M${T1.x},${T1.y} C522,155 548,160 572,165`} />
         <path className="vg-path vg-b12" strokeWidth="2.6"
-          d={`M${T1.x},${T1.y} C450,330 460,370 460,410`} />
-        {/* vg-b13 rerouted: pulls back from path coords (~355-431, ~398-475)
-            which corresponds to the centered logo on screen */}
+          d={`M${T1.x},${T1.y} C482,198 476,228 472,258`} />
         <path className="vg-path vg-b13" strokeWidth="2.6"
-          d={`M${T2.x},${T2.y} C310,420 295,460 290,510`} />
+          d={`M${T2.x},${T2.y} C278,345 285,368 288,385`} />
         <path className="vg-path vg-b14" strokeWidth="2.4"
-          d={`M${T3.x},${T3.y} C560,210 580,240 590,280`} />
+          d={`M${T3.x},${T3.y} C552,98 572,108 588,115`} />
 
-        {/* === CAPILLARIES — fan out from each branch tip === */}
-        {/* B1 tip ≈ (320, 80) */}
-        <path className="vg-path vg-c1"  strokeWidth="1.4" d="M320,80 C360,70 400,60 440,50" />
-        <path className="vg-path vg-c2"  strokeWidth="1.2" d="M320,80 C350,100 380,120 420,130" />
-        <path className="vg-path vg-c3"  strokeWidth="1.0" d="M320,80 C330,50 350,30 380,20" />
+        {/* === CAPILLARIES — fine tips fanning from branch ends === */}
+        {/* B1 tip ≈ (285, 55) */}
+        <path className="vg-path vg-c1"  strokeWidth="1.4" d="M285,55 C320,45 358,38 395,32" />
+        <path className="vg-path vg-c2"  strokeWidth="1.2" d="M285,55 C308,78 335,98 362,112" />
+        <path className="vg-path vg-c3"  strokeWidth="1.0" d="M285,55 C298,35 318,20 345,12" />
 
-        {/* B2 tip ≈ (130, 290) */}
-        <path className="vg-path vg-c4"  strokeWidth="1.3" d="M130,290 C110,330 100,360 90,400" />
-        <path className="vg-path vg-c5"  strokeWidth="1.1" d="M130,290 C90,300 60,320 30,330" />
-        <path className="vg-path vg-c6"  strokeWidth="1.0" d="M130,290 C150,320 170,340 180,370" />
+        {/* B2 tip ≈ (140, 228) */}
+        <path className="vg-path vg-c4"  strokeWidth="1.3" d="M140,228 C112,258 95,282 78,312" />
+        <path className="vg-path vg-c5"  strokeWidth="1.1" d="M140,228 C102,235 72,248 42,255" />
+        <path className="vg-path vg-c6"  strokeWidth="1.0" d="M140,228 C158,255 172,275 182,302" />
 
-        {/* B3 tip ≈ (480, 140) */}
-        <path className="vg-path vg-c7"  strokeWidth="1.3" d="M480,140 C520,130 560,120 590,110" />
-        <path className="vg-path vg-c8"  strokeWidth="1.1" d="M480,140 C510,160 530,180 555,200" />
-        <path className="vg-path vg-c9"  strokeWidth="1.0" d="M480,140 C490,110 510,90 530,70" />
+        {/* B3 tip ≈ (455, 68) */}
+        <path className="vg-path vg-c7"  strokeWidth="1.3" d="M455,68 C492,58 530,48 565,40" />
+        <path className="vg-path vg-c8"  strokeWidth="1.1" d="M455,68 C478,88 498,108 518,125" />
+        <path className="vg-path vg-c9"  strokeWidth="1.0" d="M455,68 C468,48 488,32 508,22" />
 
-        {/* B4 tip ≈ (280, 370) — c11 rerouted to stay outside the logo zone */}
-        <path className="vg-path vg-c10" strokeWidth="1.3" d="M280,370 C290,410 290,440 290,480" />
-        <path className="vg-path vg-c11" strokeWidth="1.1" d="M280,370 C290,400 295,420 300,460" />
-        <path className="vg-path vg-c12" strokeWidth="1.0" d="M280,370 C250,400 230,420 210,450" />
+        {/* B4 tip ≈ (330, 252) */}
+        <path className="vg-path vg-c10" strokeWidth="1.3" d="M330,252 C335,288 335,315 332,345" />
+        <path className="vg-path vg-c11" strokeWidth="1.1" d="M330,252 C358,268 378,280 402,292" />
+        <path className="vg-path vg-c12" strokeWidth="1.0" d="M330,252 C302,268 280,282 258,295" />
 
-        {/* B6 tip ≈ (130, 430) */}
-        <path className="vg-path vg-c13" strokeWidth="1.2" d="M130,430 C110,470 100,500 90,540" />
-        <path className="vg-path vg-c14" strokeWidth="1.0" d="M130,430 C90,440 60,460 30,470" />
-        <path className="vg-path vg-c15" strokeWidth="1.0" d="M130,430 C160,460 180,480 200,510" />
+        {/* B6 tip ≈ (90, 310) */}
+        <path className="vg-path vg-c13" strokeWidth="1.2" d="M90,310 C68,342 55,368 42,398" />
+        <path className="vg-path vg-c14" strokeWidth="1.0" d="M90,310 C58,318 32,330 10,338" />
+        <path className="vg-path vg-c15" strokeWidth="1.0" d="M90,310 C108,338 120,360 130,388" />
 
-        {/* B7 tip ≈ (430, 40) */}
-        <path className="vg-path vg-c16" strokeWidth="1.2" d="M430,40 C470,30 510,30 550,30" />
-        <path className="vg-path vg-c17" strokeWidth="1.0" d="M430,40 C460,60 490,70 510,90" />
+        {/* B7 tip ≈ (408, 28) */}
+        <path className="vg-path vg-c16" strokeWidth="1.2" d="M408,28 C448,20 488,16 528,14" />
+        <path className="vg-path vg-c17" strokeWidth="1.0" d="M408,28 C435,48 458,62 478,78" />
 
-        {/* B11 tip ≈ (570, 240) */}
-        <path className="vg-path vg-c18" strokeWidth="1.1" d="M570,240 C590,260 595,290 595,320" />
-        <path className="vg-path vg-c19" strokeWidth="1.0" d="M570,240 C585,210 590,200 595,180" />
+        {/* B11 tip ≈ (572, 165) */}
+        <path className="vg-path vg-c18" strokeWidth="1.1" d="M572,165 C588,180 595,198 596,218" />
+        <path className="vg-path vg-c19" strokeWidth="1.0" d="M572,165 C584,145 590,128 594,110" />
 
-        {/* B12 tip ≈ (460, 410) — c21 rerouted (was passing through logo) */}
-        <path className="vg-path vg-c20" strokeWidth="1.1" d="M460,410 C490,440 510,470 530,500" />
-        <path className="vg-path vg-c21" strokeWidth="1.0" d="M460,410 C470,450 475,480 480,510" />
+        {/* B12 tip ≈ (472, 258) */}
+        <path className="vg-path vg-c20" strokeWidth="1.1" d="M472,258 C492,278 508,298 522,318" />
+        <path className="vg-path vg-c21" strokeWidth="1.0" d="M472,258 C458,282 448,302 435,325" />
 
-        {/* B13 tip ≈ (400, 490) — pulled back so it doesn't cross the logo at hero top-center */}
-        <path className="vg-path vg-c22" strokeWidth="1.0" d="M400,490 C415,505 425,515 432,525" />
-
-        {/* === MACROPHAGE-REACHING BRANCHES — extend up-left toward the
-              macrophage cluster at the hero's top-left corner.
-              Endpoints intentionally exceed the original x+y<800 constraint. === */}
-        <path className="vg-path vg-bm1" strokeWidth="2.6"
-          d={`M${T3.x},${T3.y} C540,260 555,360 565,440`} />
-        <path className="vg-path vg-bm2" strokeWidth="2.2"
-          d={`M${T1.x},${T1.y} C480,350 520,420 545,485`} />
-        {/* Capillary tips off the macrophage-reaching branches */}
-        <path className="vg-path vg-bm3" strokeWidth="1.2"
-          d="M565,440 C575,460 580,475 585,490" />
-        <path className="vg-path vg-bm4" strokeWidth="1.0"
-          d="M545,485 C560,495 568,505 575,510" />
+        {/* B13 tip ≈ (288, 385) — kept well below logo zone (y < 398) */}
+        <path className="vg-path vg-c22" strokeWidth="1.0" d="M288,385 C295,392 298,396 300,400" />
       </g>
 
       <style>{`
@@ -258,12 +245,6 @@ export function VesselGrowth({ className = "", origin = "bottom-right" }: Props)
         .vg-c20 { animation-delay: 9.4s; }
         .vg-c21 { animation-delay: 9.5s; }
         .vg-c22 { animation-delay: 9.6s; }
-        /* Macrophage-reaching branches grow with the upper branches, tips at the end */
-        .vg-bm1 { animation-delay: 8.2s; }
-        .vg-bm2 { animation-delay: 8.4s; }
-        .vg-bm3 { animation-delay: 9.4s; }
-        .vg-bm4 { animation-delay: 9.6s; }
-
         @keyframes vgDraw {
           0%   { stroke-dashoffset: 1000; opacity: 0;    }
           6%   {                          opacity: 1;    }
