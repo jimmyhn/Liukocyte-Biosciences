@@ -7,44 +7,39 @@ type Member = {
   name: string;
   role: string;
   bio: string;
-  /** backgroundPosition for cropping from /profiles.png at bg-size 600px */
-  cropPos: string;
+  photo: string;
 };
 
-// profiles.png is 1272×723. At bg-size:600px the scale is ≈0.4717.
-// Top row: 3 equal columns (~424px each) → 200px scaled each.
-// Bottom row: 2 equal columns (~636px each) → 300px scaled each, y-start ~175px.
-// Each avatar is 144×144px (w-36 h-36); bg-pos centers the face in the container.
 const team: Member[] = [
   {
     name: "Devin Johnson",
     role: "Chief Executive Officer",
     bio: "Background in biomaterial research and academic communication; leads product demos, investor pitches, team coordination, and milestone execution.",
-    cropPos: "-10px 0px",
+    photo: "/team-devin.png",
   },
   {
     name: "Catherine Salgado",
     role: "Chief Information Officer",
     bio: "Background in biomaterials and cell culture; supports experimental validation, biological integration, and product feasibility.",
-    cropPos: "-10px -175px",
+    photo: "/team-catherine.png",
   },
   {
     name: "Kristin Hagen",
     role: "Chief Operations Officer",
     bio: "Extensive business experience; owns the company's business model and client interviews — driving clinical relevance and scalability.",
-    cropPos: "-215px 0px",
+    photo: "/team-kristin.png",
   },
   {
     name: "Jimmy Nguyen",
     role: "Chief Financial Officer",
     bio: "Materials research and engineering design background; responsible for cost analysis, manufacturing feasibility, and financial stability.",
-    cropPos: "-340px -175px",
+    photo: "/team-jimmy.png",
   },
   {
     name: "Ronald Nguyen",
     role: "Chief Technical Officer",
     bio: "Conducts biomaterial research and translates validated wet-lab findings into scalable, market-ready product design.",
-    cropPos: "-415px 0px",
+    photo: "/team-ronald.png",
   },
 ];
 
@@ -89,15 +84,10 @@ export function Team() {
             variants={fadeUp}
             className="rounded-2xl bg-white/[0.02] ring-1 ring-white/8 p-6 transition-transform hover:-translate-y-1"
           >
-            {/* Profile photo cropped from /profiles.png */}
-            <div
-              className="w-36 h-36 rounded-full overflow-hidden ring-2 ring-angel-sky/40"
-              style={{
-                backgroundImage: "url('/profiles.png')",
-                backgroundSize: "600px auto",
-                backgroundPosition: m.cropPos,
-                backgroundRepeat: "no-repeat",
-              }}
+            <img
+              src={m.photo}
+              alt={m.name}
+              className="w-40 h-40 rounded-full object-cover"
             />
             <h3 className="mt-5 font-display text-base font-semibold">
               {m.name}
@@ -123,7 +113,7 @@ export function Team() {
         <img
           src="/liu.png"
           alt="Wendy Liu, Ph.D."
-          className="w-28 h-28 rounded-full object-cover object-top ring-2 ring-angel-sky/40 flex-shrink-0"
+          className="w-32 h-32 rounded-full object-cover object-top flex-shrink-0"
         />
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-400">
