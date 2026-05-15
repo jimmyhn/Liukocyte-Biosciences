@@ -175,13 +175,11 @@ export function Needs() {
       </motion.div>
 
       <div className="mt-32">
-        <div className="flex flex-wrap items-end justify-between gap-3 mb-6">
-          <h3 className="font-display text-2xl md:text-3xl font-semibold">
-            Existing products <span className="text-grad">fall short.</span>
+        <div className="mb-10">
+          <h3 className="font-display text-3xl md:text-4xl font-semibold">
+            Various products are used for skin graft prep, but they{" "}
+            <span className="text-grad">fall short</span> in:
           </h3>
-          <p className="font-mono text-xs uppercase tracking-widest text-bone-400">
-            What's missing today
-          </p>
         </div>
         <ExistingFallShort />
       </div>
