@@ -3,26 +3,13 @@ import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
 import { DualSyringe } from "../illustrations/DualSyringe";
 import { SkinCrossSection } from "../illustrations/SkinCrossSection";
-import { ClinicalWorkflow } from "../illustrations/ClinicalWorkflow";
 import { ScrollCue } from "./ScrollCue";
 
-const features = [
-  {
-    heading: "PEG-NHS-PLL composition",
-    body: "Synthetic chemistry that's antimicrobial by design and ~38× cheaper to manufacture than competing biologics.",
-  },
-  {
-    heading: "Dual-barrel syringe delivery",
-    body: "Inject into tunneling wounds or spread across large surfaces — one applicator, every clinical workflow.",
-  },
-  {
-    heading: "Neutrophil-derived AN factor",
-    body: "Healing factors from your own immune cells shift the wound from inflammation to active repair.",
-  },
-  {
-    heading: "Macrophage activation",
-    body: "Triggers M1 → M2 transition, driving organized skin formation, reduced scarring, and rapid vascularization.",
-  },
+const workflowSteps = [
+  "Debridement & Sterilization",
+  "Eject ANGel onto wound & wait until it solidifies",
+  "Cover with any non-adherent dressing",
+  "Seal with film dressing",
 ];
 
 const indications = [
@@ -62,39 +49,55 @@ export function Product() {
         </motion.p>
       </motion.div>
 
-      {/* Dual-barrel syringe + features */}
-      <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Dual-barrel syringe + workflow */}
+      <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* LEFT — syringe module */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true, amount: 0.3 }}
-          className="rounded-3xl bg-white/[0.02] ring-1 ring-white/8 p-8 md:p-12"
+          className="rounded-3xl bg-white/[0.02] ring-1 ring-white/8 p-8 md:p-10 flex flex-col items-center"
         >
           <DualSyringe className="w-full h-auto" />
-          <p className="mt-6 text-center text-xs font-mono uppercase tracking-[0.3em] text-bone-400">
-            Hydrogel + AN factor · One applicator
+          <p className="mt-5 text-center text-base md:text-lg text-bone-300 leading-snug max-w-xs">
+            Once ejected out, reagent will mix and hydrogel will{" "}
+            <span className="text-grad font-semibold">solidify in 5–10 seconds.</span>
           </p>
         </motion.div>
 
-        <motion.dl
+        {/* RIGHT — workflow steps */}
+        <motion.div
           variants={stagger(0.05, 0.12)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="space-y-6"
+          className="flex flex-col justify-center h-full"
         >
-          {features.map((f) => (
-            <motion.div key={f.heading} variants={fadeUp} className="group">
-              <dt className="font-display text-xl font-semibold transition-colors group-hover:text-grad">
-                {f.heading}
-              </dt>
-              <dd className="mt-1.5 text-sm text-bone-400 leading-relaxed">
-                {f.body}
-              </dd>
-            </motion.div>
-          ))}
-        </motion.dl>
+          <motion.h3
+            variants={fadeUp}
+            className="font-display text-2xl md:text-3xl font-semibold leading-snug"
+          >
+            <span className="text-grad">Seamlessly</span> integrates with
+            physicians&apos; workflows, in 4 steps.
+          </motion.h3>
+          <motion.ol variants={stagger(0.05, 0.1)} className="mt-8 space-y-5">
+            {workflowSteps.map((step, i) => (
+              <motion.li
+                key={step}
+                variants={fadeUp}
+                className="flex items-start gap-4"
+              >
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-angel-blue/20 ring-1 ring-angel-blue/40 flex items-center justify-center font-mono text-sm font-semibold text-angel-sky">
+                  {i + 1}
+                </span>
+                <span className="text-base md:text-lg text-bone-200 leading-snug pt-0.5">
+                  {step}
+                </span>
+              </motion.li>
+            ))}
+          </motion.ol>
+        </motion.div>
       </div>
 
       {/* Skin cross-section */}
@@ -113,19 +116,6 @@ export function Product() {
         </h3>
         <SkinCrossSection className="w-full h-auto" />
       </motion.div>
-
-      {/* Workflow */}
-      <div className="mt-24">
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <h3 className="font-display text-2xl md:text-3xl font-semibold">
-            As simple as <span className="text-grad">four steps</span>.
-          </h3>
-          <p className="font-mono text-xs uppercase tracking-widest text-bone-400">
-            Clinical workflow
-          </p>
-        </div>
-        <ClinicalWorkflow />
-      </div>
 
       {/* Indication pills */}
       <motion.div

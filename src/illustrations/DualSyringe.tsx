@@ -17,7 +17,7 @@ export function DualSyringe({ className = "" }: { className?: string }) {
   const BW = 290;   // barrel width
   const BH = 72;    // single barrel height
   const GAP = 0;    // gap between barrels (0 = flush together)
-  const TOP_Y = 90; // top barrel top edge y
+  const TOP_Y = 55; // top barrel top edge y
   const BOT_Y = TOP_Y + BH + GAP; // bottom barrel top edge y (= 162)
   const TOTAL_H = BH * 2 + GAP;   // total stacked height = 144
   const CY = TOP_Y + TOTAL_H / 2; // vertical center = 162
