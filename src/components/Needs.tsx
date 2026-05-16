@@ -145,7 +145,7 @@ export function Needs() {
             <GrowthBarsIcon className="w-full max-w-[280px] h-auto" />
           </div>
           <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-angel-orange leading-none">
-            $32B Burden
+            $32B
           </div>
           <p className="mt-5 text-base md:text-lg text-bone-300 leading-relaxed max-w-[320px]">
             Annual economic burden in the US from failed graft procedures.
