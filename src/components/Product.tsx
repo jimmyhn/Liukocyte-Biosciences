@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { fadeUp, stagger } from "../lib/motion";
 import { DualSyringe } from "../illustrations/DualSyringe";
-import { SkinCrossSection } from "../illustrations/SkinCrossSection";
+import { WoundBedSteps } from "../illustrations/WoundBedSteps";
 import { ScrollCue } from "./ScrollCue";
 
 const workflowSteps = [
@@ -105,7 +105,7 @@ export function Product() {
           ANGel helps <span className="text-grad">support</span> the wound bed like a{" "}
           <span className="text-grad">scaffold</span>.
         </h3>
-        <SkinCrossSection className="w-full h-auto" />
+        <WoundBedSteps className="w-full" />
       </motion.div>
 
       <div className="mt-16 flex justify-center">

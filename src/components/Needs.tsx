@@ -4,9 +4,20 @@ import { fadeUp, stagger } from "../lib/motion";
 import { HealingPhases } from "../illustrations/HealingPhases";
 import { ExistingFallShort } from "../illustrations/ExistingFallShort";
 import { ScrollCue } from "./ScrollCue";
+import type { CSSProperties } from "react";
+
+/* =================================================================
+ * MANUAL CROP CONTROLS — tweak how each stats-row illustration sits.
+ *
+ *   x:    positive = move icon RIGHT, negative = LEFT   (in %)
+ *   y:    positive = move icon DOWN,  negative = UP     (in %)
+ *   zoom: 1 = no zoom; >1 zooms IN; <1 zooms OUT
+ * ================================================================= */
+const fourPeopleAdjust = { x: 0, y: 0, zoom: 1 };
+const growthBarsAdjust = { x: 0, y: 0, zoom: 1 };
 
 /** Icon: 4 person silhouettes — first one accented (orange), rest muted. */
-function FourPeopleIcon({ className = "" }: { className?: string }) {
+function FourPeopleIcon({ className = "", style }: { className?: string; style?: CSSProperties }) {
   const person = (
     <g>
       <circle cx="20" cy="14" r="9" />
@@ -17,6 +28,7 @@ function FourPeopleIcon({ className = "" }: { className?: string }) {
     <svg
       viewBox="0 0 200 80"
       className={className}
+      style={style}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
@@ -33,11 +45,12 @@ function FourPeopleIcon({ className = "" }: { className?: string }) {
 }
 
 /** Icon: 3 ascending bars with an upward arrow and a dollar sign. */
-function GrowthBarsIcon({ className = "" }: { className?: string }) {
+function GrowthBarsIcon({ className = "", style }: { className?: string; style?: CSSProperties }) {
   return (
     <svg
       viewBox="0 0 200 120"
       className={className}
+      style={style}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
@@ -126,7 +139,10 @@ export function Needs() {
           className="flex flex-col items-center text-center group"
         >
           <div className="h-[180px] flex items-center justify-center">
-            <FourPeopleIcon className="w-full max-w-[300px] h-auto" />
+            <FourPeopleIcon
+              className="w-full max-w-[300px] h-auto"
+              style={{ transform: `translate(${fourPeopleAdjust.x}%, ${fourPeopleAdjust.y}%) scale(${fourPeopleAdjust.zoom})` }}
+            />
           </div>
           <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-angel-orange leading-none">
             1 in 4 Fail
@@ -142,7 +158,10 @@ export function Needs() {
           className="flex flex-col items-center text-center group"
         >
           <div className="h-[180px] flex items-center justify-center">
-            <GrowthBarsIcon className="w-full max-w-[280px] h-auto" />
+            <GrowthBarsIcon
+              className="w-full max-w-[280px] h-auto"
+              style={{ transform: `translate(${growthBarsAdjust.x}%, ${growthBarsAdjust.y}%) scale(${growthBarsAdjust.zoom})` }}
+            />
           </div>
           <div className="mt-8 font-display text-3xl md:text-4xl font-semibold text-angel-orange leading-none">
             $32B
